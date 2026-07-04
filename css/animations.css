@@ -1,0 +1,51 @@
+/* ═══════════════════════════════════════════════════════════
+   GEN6 ENTERPRISE — ANIMATION KEYFRAMES
+   ═══════════════════════════════════════════════════════════ */
+
+/* Pulsing nav / city dot */
+@keyframes dotPulse {
+  0%, 100% { box-shadow: 0 0 10px rgba(0,255,136,0.8); opacity: 1; }
+  50%      { box-shadow: 0 0 20px rgba(0,255,136,0.3); opacity: 0.6; }
+}
+
+/* Animated gradient border */
+@keyframes borderRotate {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Hero particle field — rise and fade */
+@keyframes particleFloat {
+  0%   { transform: translateY(100vh) scale(0.8); opacity: 0; }
+  8%   { opacity: 0.9; }
+  85%  { opacity: 0.5; }
+  100% { transform: translateY(-10vh) scale(1.1); opacity: 0; }
+}
+
+/* Dot traveling along model-diagram arrows (horizontal) */
+@keyframes arrowDot {
+  0%   { left: 0;   opacity: 0; }
+  12%  { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { left: calc(100% - 8px); opacity: 0; }
+}
+
+/* Dot traveling along model-diagram arrows (vertical / mobile) */
+@keyframes arrowDotVert {
+  0%   { top: 0;    opacity: 0; }
+  12%  { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { top: calc(100% - 8px); opacity: 0; }
+}
+
+/* Press / visibility ticker */
+@keyframes tickerScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .particle, .model-arrow::after, .ticker-track, .nav-dot, .city-dot {
+    animation: none !important;
+  }
+}

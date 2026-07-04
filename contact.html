@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact GEN6 Enterprise — Housing, Fleet, Partnership Inquiries | Texas</title>
+  <meta name="description" content="Contact GEN6 Enterprise for housing, vehicle rental, property partnership, or investor inquiries. Fort Worth, Texas. Response within 24 hours.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="GEN6 Enterprise LLC">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="GEN6 Enterprise">
+  <meta property="og:title" content="Contact GEN6 Enterprise">
+  <meta property="og:description" content="Housing, vehicle rental, property partnership, or investor inquiries. Fort Worth, Texas. Response within 24 hours.">
+  <meta property="og:image" content="https://gen6enterprise.com/assets/GEN6_Logo_NavyBG.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="geo.region" content="US-TX">
+  <meta name="geo.placename" content="Fort Worth, Texas">
+  <link rel="canonical" href="https://gen6enterprise.com/contact.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/animations.css">
+</head>
+<body>
+
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="/index.html" class="nav-logo" aria-label="GEN6 Enterprise Home">
+        <span class="nav-wordmark">GEN6<span class="nav-dot" aria-hidden="true"></span></span>
+        <span class="nav-sub">ENTERPRISE</span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="/index.html"           class="nav-link">Home</a></li>
+        <li><a href="/fleet.html"           class="nav-link">GEN6 Fleet</a></li>
+        <li><a href="/housing.html"         class="nav-link">GEN6 Housing</a></li>
+        <li><a href="/property-owners.html" class="nav-link">Property Owners</a></li>
+        <li><a href="/partners.html"        class="nav-link">Partners</a></li>
+        <li><a href="/about.html"           class="nav-link">About</a></li>
+      </ul>
+      <a href="/contact.html" class="nav-cta">Get Started</a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-menu" role="dialog" aria-label="Mobile navigation">
+        <a href="/index.html"           class="nav-menu-link">Home</a>
+        <a href="/fleet.html"           class="nav-menu-link">GEN6 Fleet</a>
+        <a href="/housing.html"         class="nav-menu-link">GEN6 Housing</a>
+        <a href="/property-owners.html" class="nav-menu-link">Property Owners</a>
+        <a href="/partners.html"        class="nav-menu-link">Partners</a>
+        <a href="/about.html"           class="nav-menu-link">About</a>
+        <a href="/contact.html"         class="nav-menu-link nav-menu-cta">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- SECTION 1 — PAGE HEADER -->
+  <header class="hero hero-sub bg-grid" style="min-height: 40vh; padding-bottom: 40px;">
+    <div class="orb orb-green" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <p class="hero-label reveal">[ CONTACT ]</p>
+      <h1 class="hero-h1 reveal">Let's talk.</h1>
+      <p class="hero-subtext reveal" style="margin-bottom: 0;">Use the form below to tell us what you need. We review every submission personally and respond within 24 hours.</p>
+    </div>
+  </header>
+
+  <main>
+    <!-- SECTION 2 — CONTACT INFO + FORM -->
+    <section class="section" style="padding-top: 40px;">
+      <div class="section-inner">
+        <div class="split-grid" style="align-items: start;">
+          <div class="reveal">
+            <div class="contact-info">
+              <div class="contact-info-item"><span class="row-icon" aria-hidden="true">📍</span> Fort Worth, Texas</div>
+              <div class="contact-info-item"><span class="row-icon" aria-hidden="true">✉️</span> <a href="mailto:hello@gen6enterprise.com">hello@gen6enterprise.com</a></div>
+              <div class="contact-info-item"><span class="row-icon" aria-hidden="true">📱</span> <a href="https://instagram.com/gen6enterprise" target="_blank" rel="noopener">@gen6enterprise</a></div>
+              <div class="contact-info-item"><span class="row-icon" aria-hidden="true">⚡</span> Response time: 24 hours</div>
+            </div>
+          </div>
+
+          <div class="form-container reveal">
+            <form id="contact-form">
+              <div class="form-row">
+                <input type="text" name="firstName" placeholder="First name" required aria-label="First name">
+                <input type="text" name="lastName"  placeholder="Last name" required aria-label="Last name">
+              </div>
+              <input type="email" name="email" placeholder="Email address" required aria-label="Email address">
+              <input type="tel"   name="phone" placeholder="Phone number" aria-label="Phone number">
+
+              <!-- Inquiry type selector — drives conditional fields -->
+              <select name="inquiryType" id="inquiryType" required aria-label="What can we help you with?">
+                <option value="" disabled selected>What can we help you with?</option>
+                <option value="housing">I need housing</option>
+                <option value="fleet">I need a vehicle</option>
+                <option value="both">I need housing + a vehicle</option>
+                <option value="property">I own a property and want to partner</option>
+                <option value="investor">Investment or funding inquiry</option>
+                <option value="strategic">Strategic partnership</option>
+                <option value="other">Something else</option>
+              </select>
+
+              <!-- Housing fields -->
+              <div class="conditional-fields" data-show-for="housing,both" style="display:none;">
+                <input type="text" name="city" placeholder="City you need housing in" aria-label="City you need housing in">
+                <div class="form-row">
+                  <input type="date" name="moveIn" aria-label="Move-in date">
+                  <input type="date" name="moveOut" aria-label="Move-out date">
+                </div>
+                <select name="clientType" aria-label="I am a...">
+                  <option value="" disabled selected>I am a...</option>
+                  <option value="travel-nurse">Travel nurse</option>
+                  <option value="contractor">Contractor</option>
+                  <option value="corporate">Corporate traveler</option>
+                  <option value="insurance">Insurance displacement</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <!-- Fleet fields -->
+              <div class="conditional-fields" data-show-for="fleet,both" style="display:none;">
+                <input type="text" name="vehicleCity" placeholder="City you need the vehicle in" aria-label="City you need the vehicle in">
+                <div class="form-row">
+                  <input type="date" name="vehicleStart" aria-label="Vehicle start date">
+                  <input type="date" name="vehicleEnd" aria-label="Vehicle end date">
+                </div>
+              </div>
+
+              <!-- Property fields -->
+              <div class="conditional-fields" data-show-for="property" style="display:none;">
+                <input type="text" name="propertyAddress" placeholder="Property address" aria-label="Property address">
+                <input type="number" name="monthlyRate" placeholder="Monthly rate ($)" aria-label="Monthly rate">
+              </div>
+
+              <textarea name="details" rows="3" placeholder="Any additional details..." aria-label="Additional details"></textarea>
+
+              <button type="submit" class="form-submit-btn">Send Message →</button>
+              <p class="form-note">Every message goes directly to Trey. You'll hear back within 24 hours.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span class="footer-wordmark">GEN6<span class="footer-dot"></span></span>
+          <span class="footer-sub">ENTERPRISE</span>
+        </div>
+        <p class="footer-tagline">Housing and transportation for professionals on the move. One company. Both problems solved.</p>
+        <div class="footer-social">
+          <a href="https://instagram.com/gen6enterprise" class="footer-social-link" target="_blank" rel="noopener" aria-label="Instagram">@gen6enterprise</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-heading">Services</p>
+        <a href="/fleet.html"   class="footer-link">GEN6 Fleet</a>
+        <a href="/housing.html" class="footer-link">GEN6 Housing</a>
+        <a href="/property-owners.html" class="footer-link">Property Owners</a>
+        <a href="/partners.html" class="footer-link">Partners</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-heading">Company</p>
+        <a href="/about.html"   class="footer-link">About</a>
+        <a href="/contact.html" class="footer-link">Contact</a>
+        <a href="https://gen6education.netlify.app" class="footer-link" target="_blank" rel="noopener">GEN6 Program</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-heading">Markets</p>
+        <span class="footer-link">Fort Worth, TX</span>
+        <span class="footer-link">Dallas, TX</span>
+        <span class="footer-link">Garland, TX</span>
+        <span class="footer-link">Texas Statewide</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <p class="footer-copy">© 2025 GEN6 Enterprise LLC. All rights reserved. Fort Worth, Texas.</p>
+        <div class="footer-bottom-links">
+          <a href="/privacy.html" class="footer-legal">Privacy Policy</a>
+          <a href="/terms.html"   class="footer-legal">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

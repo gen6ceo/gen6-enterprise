@@ -1,0 +1,12 @@
+{
+  "name": "gen6-enterprise",
+  "version": "1.0.0",
+  "description": "GEN6 Enterprise — housing and transportation for traveling professionals. Static site + Netlify functions.",
+  "private": true,
+  "scripts": {
+    "dev": "npx serve .",
+    "netlify": "npx netlify dev"
+  },
+  "author": "GEN6 Enterprise LLC",
+  "license": "UNLICENSED"
+}
