@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Page Not Found | GEN6 Enterprise</title>
+  <title>Booking Confirmed — GEN6 Enterprise</title>
   <meta name="robots" content="noindex">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,10 +46,13 @@
   <main class="page-404 bg-grid">
     <div class="orb orb-green" aria-hidden="true"></div>
     <div class="orb orb-blue" aria-hidden="true"></div>
-    <div style="position: relative; z-index: 1;">
-      <p class="code-404">404</p>
-      <h1 class="section-heading">This page moved on to its next assignment.</h1>
-      <p class="section-subtext" style="margin: 0 auto 36px;">The page you're looking for doesn't exist — but housing and transportation solutions do.</p>
+    <div style="position: relative; z-index: 1; max-width: 640px;">
+      <div class="form-success-icon" style="width: 76px; height: 76px; font-size: 34px; margin-bottom: 28px;">✓</div>
+      <h1 class="section-heading" id="successHeading">Booking confirmed.</h1>
+      <p class="section-subtext" style="margin: 0 auto 12px;" id="successBody">
+        You're set. Check your email for your receipt and next steps — we'll coordinate pickup and move-in details from there.
+      </p>
+      <p class="form-note" style="margin-bottom: 36px;">Questions any time: <a href="https://instagram.com/gen6enterprise" target="_blank" rel="noopener" style="color: var(--blue-light);">@gen6enterprise</a></p>
       <div class="hero-ctas" style="justify-content: center; margin-bottom: 0;">
         <a href="/index.html" class="btn btn-green">Back to Home →</a>
         <a href="/contact.html" class="btn btn-ghost-white">Contact GEN6</a>
@@ -57,7 +60,17 @@
     </div>
   </main>
 
-  <script src="/js/effects.js"></script>
   <script src="/js/main.js"></script>
+  <script>
+    (function () {
+      const params = new URLSearchParams(location.search);
+      if (params.get('mode') === 'reserved') {
+        document.getElementById('successHeading').textContent = 'Reservation received.';
+        document.getElementById('successBody').textContent =
+          "Nothing charged, no deposit. We're confirming your quote and documents now — " +
+          "expect your confirmation and a secure payment link (card, Affirm, or Klarna) within hours.";
+      }
+    })();
+  </script>
 </body>
 </html>
