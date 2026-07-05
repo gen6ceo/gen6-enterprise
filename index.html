@@ -19,7 +19,7 @@
   <link rel="canonical" href="https://gen6enterprise.com/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/global.css">
   <link rel="stylesheet" href="/css/animations.css">
   <script type="application/ld+json">
@@ -76,6 +76,7 @@
 
   <!-- SECTION 1 — HERO -->
   <header class="hero bg-grid">
+    <div class="hero-shader" aria-hidden="true"><canvas></canvas></div>
     <div class="orb orb-green" aria-hidden="true"></div>
     <div class="orb orb-blue" aria-hidden="true"></div>
     <div class="particles" aria-hidden="true">
@@ -134,7 +135,9 @@
 
         <div class="grid-2 stagger">
           <article class="division-card reveal">
-            <div class="card-icon" aria-hidden="true">🚗</div>
+            <div class="division-photo">
+              <img src="/assets/stitch-fleet.jpg" alt="GEN6 Fleet vehicles in a modern garage" loading="lazy">
+            </div>
             <span class="card-tag">Transportation</span>
             <h3 class="card-heading">GEN6 Fleet</h3>
             <p class="card-body">Weekly and long-term vehicle rentals for traveling professionals who need reliable transportation without the commitment of a personal lease. Flexible terms. Vetted vehicles. Professional service.</p>
@@ -149,7 +152,9 @@
           </article>
 
           <article class="division-card reveal">
-            <div class="card-icon" aria-hidden="true">🏠</div>
+            <div class="division-photo">
+              <img src="/assets/stitch-housing.jpg" alt="Furnished GEN6 housing interior with skyline view" loading="lazy">
+            </div>
             <span class="card-tag card-tag-green">Housing</span>
             <h3 class="card-heading">GEN6 Housing</h3>
             <p class="card-body">Furnished mid-term housing designed for travel nurses, contractors, and corporate professionals who need a real home — not a hotel — during their assignment.</p>
@@ -387,6 +392,7 @@
     </div>
   </footer>
 
+  <script src="/js/effects.js"></script>
   <script src="/js/main.js"></script>
 </body>
 </html>
