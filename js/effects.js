@@ -118,6 +118,31 @@
     }, { passive: true });
   }
 
+  // ── Cursor spotlight on cards ──────────────────────────────
+  const spotTargets = document.querySelectorAll(
+    '.division-card, .listing-card, .client-card, .service-card, .value-card, .opportunity-box, .dash-widget, .callout-box, .testimonial-card'
+  );
+  spotTargets.forEach((card) => {
+    const spot = document.createElement('div');
+    spot.className = 'card-spot';
+    card.appendChild(spot);
+    card.addEventListener('mousemove', (e) => {
+      const r = card.getBoundingClientRect();
+      spot.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      spot.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+
+  // ── Hero background parallax ───────────────────────────────
+  const heroBg = document.querySelector('.hero-bg img');
+  if (heroBg && !reducedMotion) {
+    window.addEventListener('mousemove', (e) => {
+      const dx = (e.clientX / window.innerWidth - 0.5) * 18;
+      const dy = (e.clientY / window.innerHeight - 0.5) * 12;
+      heroBg.style.transform = 'scale(1.08) translate(' + -dx + 'px, ' + -dy + 'px)';
+    }, { passive: true });
+  }
+
   // ── 3D card tilt on hover ──────────────────────────────────
   const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   if (canHover && !reducedMotion) {

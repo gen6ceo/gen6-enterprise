@@ -1566,3 +1566,162 @@ textarea { resize: vertical; min-height: 100px; }
   .cascade > *:nth-child(4n+3) { margin-top: 36px; }
   .cascade > *:nth-child(4n+4) { margin-top: 54px; }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   PASS 3 — CINEMATIC: full-bleed hero imagery, blended shader,
+   cursor spotlight, image feature strip, glow upgrades
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Full-bleed cinematic hero ─────────────────────────────── */
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  overflow: hidden;
+}
+.hero-bg img {
+  width: 100%; height: 100%; object-fit: cover;
+  transform: scale(1.08);
+  will-change: transform;
+  filter: saturate(1.05) brightness(0.85);
+}
+.hero-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(90deg, rgba(6,11,20,0.96) 0%, rgba(6,11,20,0.82) 38%, rgba(6,11,20,0.35) 70%, rgba(6,11,20,0.55) 100%),
+    linear-gradient(180deg, rgba(6,11,20,0.5) 0%, transparent 25%, transparent 70%, var(--navy) 100%);
+}
+/* shader becomes moving light OVER the photo, not a backdrop */
+.hero-cinematic .hero-shader { mix-blend-mode: screen; opacity: 0.8; z-index: 1; }
+.hero-cinematic .bg-grid-layer {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(30,77,183,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30,77,183,0.08) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse at 30% 40%, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at 30% 40%, black 30%, transparent 75%);
+}
+.hero-cinematic .hero-inner { z-index: 3; }
+.hero-cinematic .hero-inner::before,
+.hero-cinematic .hero-inner::after { border-color: rgba(0,255,136,0.35); }
+
+/* Hero bottom feature strip (NeoDwelling style) */
+.hero-features {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
+  background: rgba(6,11,20,0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(0,255,136,0.15);
+}
+.hero-features-inner {
+  max-width: var(--max-content);
+  margin: 0 auto;
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.hero-feature {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+.hero-feature .hf-icon { color: var(--green); font-size: 14px; }
+@media (max-width: 860px) {
+  .hero-features { position: relative; }
+  .hero-features-inner { justify-content: flex-start; }
+}
+
+/* ── Cursor spotlight on cards (JS sets --mx/--my) ─────────── */
+.division-card, .listing-card, .client-card, .service-card,
+.value-card, .opportunity-box, .dash-widget, .callout-box, .testimonial-card {
+  position: relative;
+}
+.card-spot {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  border-radius: inherit;
+  background: radial-gradient(300px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(0,255,136,0.09), transparent 65%);
+  z-index: 1;
+}
+*:hover > .card-spot { opacity: 1; }
+
+/* ── Image feature strip (5-up, NeoDwelling smart features) ── */
+.feature-strip {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+@media (max-width: 1000px) { .feature-strip { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px)  { .feature-strip { grid-template-columns: 1fr; } }
+.feature-tile {
+  background: var(--navy-mid);
+  border: 1px solid var(--border-blue);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), border-color 0.3s, box-shadow 0.3s;
+}
+.feature-tile:hover {
+  transform: translateY(-5px);
+  border-color: var(--border-green);
+  box-shadow: 0 0 30px rgba(0,255,136,0.12);
+}
+.feature-tile-photo { height: 130px; overflow: hidden; position: relative; }
+.feature-tile-photo img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.feature-tile:hover .feature-tile-photo img { transform: scale(1.08); }
+.feature-tile-photo::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, var(--navy-mid), transparent 60%);
+}
+.feature-tile-body { padding: 14px 16px 18px; }
+.feature-tile-name {
+  font-size: 14px; font-weight: 700; color: #fff;
+  margin-bottom: 5px;
+}
+.feature-tile-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+/* ── Stats with icons ──────────────────────────────────────── */
+.stat-icon {
+  font-size: 20px;
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,255,136,0.07);
+  border: 1px solid rgba(0,255,136,0.2);
+  margin-bottom: 12px;
+}
+
+/* ── CTA section with photo backdrop ───────────────────────── */
+.cta-backdrop {
+  position: absolute; inset: 0; z-index: 0;
+  overflow: hidden;
+}
+.cta-backdrop img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(0.5);
+}
+.cta-backdrop::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, var(--navy) 0%, rgba(10,22,40,0.9) 45%, rgba(10,22,40,0.55) 100%);
+}
+
+/* ── Section glow separators ───────────────────────────────── */
+.section-glow-top { border-top: 1px solid rgba(0,255,136,0.12); position: relative; }
+.section-glow-top::before {
+  content: '';
+  position: absolute; top: -1px; left: 20%; right: 20%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,255,136,0.55), transparent);
+}

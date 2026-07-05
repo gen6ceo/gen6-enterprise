@@ -75,7 +75,9 @@
   </nav>
 
   <!-- SECTION 1 — HERO -->
-  <header class="hero bg-grid">
+  <header class="hero bg-grid hero-cinematic">
+    <div class="hero-bg" aria-hidden="true"><img src="/assets/housing-courtyard.jpg" alt=""></div>
+    <div class="bg-grid-layer" aria-hidden="true"></div>
     <div class="hero-shader" aria-hidden="true"><canvas></canvas></div>
     <div class="orb orb-green" aria-hidden="true"></div>
     <div class="orb orb-blue" aria-hidden="true"></div>
@@ -127,6 +129,16 @@
         </aside>
       </div>
     </div>
+
+    <div class="hero-features">
+      <div class="hero-features-inner">
+        <span class="hero-feature"><span class="hf-icon" aria-hidden="true">⌂</span> Furnished Housing</span>
+        <span class="hero-feature"><span class="hf-icon" aria-hidden="true">⛟</span> Vetted Fleet</span>
+        <span class="hero-feature"><span class="hf-icon" aria-hidden="true">⚡</span> 24hr Setup</span>
+        <span class="hero-feature"><span class="hf-icon" aria-hidden="true">🤝</span> Direct Relationship</span>
+        <span class="hero-feature"><span class="hf-icon" aria-hidden="true">📍</span> DFW &amp; Growing</span>
+      </div>
+    </div>
   </header>
 
   <main>
@@ -134,20 +146,70 @@
     <section class="stats-bar" aria-label="GEN6 statistics">
       <div class="stats-inner stagger">
         <div class="stat-item reveal">
+          <span class="stat-icon" aria-hidden="true">👥</span>
           <span class="stat-number"><span class="counter" data-target="50">0</span><span class="stat-suffix">+</span></span>
           <span class="stat-label">Professionals Served</span>
         </div>
         <div class="stat-item reveal">
+          <span class="stat-icon" aria-hidden="true">⭐</span>
           <span class="stat-number"><span class="counter" data-target="98">0</span><span class="stat-suffix">%</span></span>
           <span class="stat-label">Client Satisfaction</span>
         </div>
         <div class="stat-item reveal">
+          <span class="stat-icon" aria-hidden="true">⚡</span>
           <span class="stat-number"><span class="counter" data-target="24">0</span><span class="stat-suffix">hr</span></span>
           <span class="stat-label">Average Response Time</span>
         </div>
         <div class="stat-item reveal">
+          <span class="stat-icon" aria-hidden="true">📍</span>
           <span class="stat-number"><span class="stat-label-prefix">EST.&nbsp;</span><span class="counter" data-target="2024">0</span></span>
           <span class="stat-label">Fort Worth, TX</span>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- THE EXPERIENCE — image feature strip -->
+    <section class="section section-glow-top" style="padding-top: clamp(56px, 7vw, 90px); padding-bottom: clamp(56px, 7vw, 90px);">
+      <div class="section-inner">
+        <p class="section-label reveal">[ THE EXPERIENCE ]</p>
+        <h2 class="section-heading reveal" style="margin-bottom: 40px;">Everything an assignment demands.</h2>
+        <div class="feature-strip stagger">
+          <article class="feature-tile reveal">
+            <div class="feature-tile-photo"><img src="/assets/housing-bedroom.jpg" alt="Furnished bedroom" loading="lazy"></div>
+            <div class="feature-tile-body">
+              <p class="feature-tile-name">A Real Home</p>
+              <p class="feature-tile-desc">Furnished, quiet, and actually comfortable — not a hotel room.</p>
+            </div>
+          </article>
+          <article class="feature-tile reveal">
+            <div class="feature-tile-photo"><img src="/assets/vehicle-sedan.jpg" alt="Executive sedan" loading="lazy"></div>
+            <div class="feature-tile-body">
+              <p class="feature-tile-name">Reliable Wheels</p>
+              <p class="feature-tile-desc">Vetted, maintained vehicles matched to your assignment.</p>
+            </div>
+          </article>
+          <article class="feature-tile reveal">
+            <div class="feature-tile-photo"><img src="/assets/housing-office.jpg" alt="In-unit workspace" loading="lazy"></div>
+            <div class="feature-tile-body">
+              <p class="feature-tile-name">Work-Ready</p>
+              <p class="feature-tile-desc">Desk, chair, and fast WiFi in every unit from day one.</p>
+            </div>
+          </article>
+          <article class="feature-tile reveal">
+            <div class="feature-tile-photo"><img src="/assets/vehicle-suv-black.jpg" alt="Executive SUV" loading="lazy"></div>
+            <div class="feature-tile-body">
+              <p class="feature-tile-name">Crew Capable</p>
+              <p class="feature-tile-desc">Multi-unit housing and fleet vehicles for whole teams.</p>
+            </div>
+          </article>
+          <article class="feature-tile reveal">
+            <div class="feature-tile-photo"><img src="/assets/housing-interior-2.jpg" alt="Move-in ready interior" loading="lazy"></div>
+            <div class="feature-tile-body">
+              <p class="feature-tile-name">Move-In Day One</p>
+              <p class="feature-tile-desc">Utilities on, linens made, keys waiting. Just arrive.</p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -337,6 +399,7 @@
 
     <!-- SECTION 7 — LEAD CAPTURE -->
     <section class="section split-cta">
+      <div class="cta-backdrop" aria-hidden="true"><img src="/assets/housing-interior-2.jpg" alt="" loading="lazy"></div>
       <div class="section-inner">
         <div class="split-grid">
           <div class="reveal">
