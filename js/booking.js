@@ -4,11 +4,25 @@
    ═══════════════════════════════════════════════════════════ */
 
 (function () {
+  // Rates in dollars per billing period. Mirror of the server table in
+  // api/create-checkout-session.js — null means quote-first.
+  const RATES = {
+    sedan:      { weekly: 400, monthly: null },
+    'suv-exec': { weekly: null, monthly: null },
+    'suv-prem': { weekly: null, monthly: null },
+    executive:  { weekly: null, monthly: null },
+  };
+
   const state = {
     service: null,       // fleet | housing | both
     vehicleClass: null,  // sedan | suv-exec | suv-prem | executive
-    rate: null,          // weekly rate in dollars, null = quote path
+    billing: 'weekly',   // weekly | monthly
   };
+
+  function currentRate() {
+    if (!state.vehicleClass || !RATES[state.vehicleClass]) return null;
+    return RATES[state.vehicleClass][state.billing];
+  }
 
   const $ = (id) => document.getElementById(id);
   const panes = [1, 2, 3].map((n) => $('pane-' + n));
@@ -38,6 +52,7 @@
       card.setAttribute('aria-pressed', 'true');
       state.service = card.dataset.service;
       classWrap.style.display = state.service === 'housing' ? 'none' : 'block';
+      document.getElementById('billingWrap').style.display = state.service === 'housing' ? 'none' : 'block';
       showErr('err-service', false);
     };
     card.addEventListener('click', pick);
@@ -49,11 +64,25 @@
       document.querySelectorAll('.class-row').forEach((r) => r.classList.remove('selected'));
       row.classList.add('selected');
       state.vehicleClass = row.dataset.class;
-      state.rate = row.dataset.rate ? parseInt(row.dataset.rate, 10) : null;
       showErr('err-class', false);
     };
     row.addEventListener('click', pick);
     row.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
+  });
+
+  // Billing frequency choice
+  document.querySelectorAll('#billingChoice .choice-card').forEach((card) => {
+    const pick = () => {
+      document.querySelectorAll('#billingChoice .choice-card').forEach((c) => {
+        c.classList.remove('selected');
+        c.setAttribute('aria-pressed', 'false');
+      });
+      card.classList.add('selected');
+      card.setAttribute('aria-pressed', 'true');
+      state.billing = card.dataset.billing;
+    };
+    card.addEventListener('click', pick);
+    card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
   });
 
   // Preselect from ?service= query param
@@ -104,15 +133,8 @@
   $('backTo2').addEventListener('click', () => goTo(2));
 
   // ── Step 3: summary + pay ──────────────────────────────────
-  function weeksBetween() {
-    const s = new Date($('startDate').value);
-    const e = $('endDate').value ? new Date($('endDate').value) : null;
-    if (!e || e <= s) return 1;
-    return Math.max(1, Math.ceil((e - s) / (7 * 24 * 3600 * 1000)));
-  }
-
   function payableNow() {
-    return state.service === 'fleet' && state.rate !== null;
+    return state.service === 'fleet' && currentRate() !== null;
   }
 
   const CLASS_LABELS = {
@@ -132,13 +154,15 @@
 
     let totalRow = '';
     if (payableNow()) {
-      const weeks = weeksBetween();
-      const total = state.rate * weeks;
-      rows.push(['Rate', '$' + state.rate + '/week × ' + weeks + ' week' + (weeks > 1 ? 's' : '')]);
-      totalRow = '<div class="sum-row sum-total"><span>Due today</span><span class="sum-val">$' + total.toLocaleString() + '</span></div>';
+      const rate = currentRate();
+      const per = state.billing === 'monthly' ? 'month' : 'week';
+      rows.push(['Rate', '$' + rate.toLocaleString() + '/' + per]);
+      rows.push(['Then', '$' + rate.toLocaleString() + ' every ' + per +
+        ($('endDate').value ? ' — stops automatically ' + $('endDate').value : ' until you end the rental')]);
+      totalRow = '<div class="sum-row sum-total"><span>Due today</span><span class="sum-val">$' + rate.toLocaleString() + '</span></div>';
       $('payMethods').style.display = 'flex';
       $('confirmBtn').innerHTML = 'Confirm &amp; Pay →';
-      $('confirmNote').textContent = 'No deposit. Your payment covers the rental itself — nothing else.';
+      $('confirmNote').textContent = 'No deposit. First ' + per + ' due today, then the same rate each ' + per + '.';
       if ($('insurance').value === 'gen6') {
         $('confirmNote').textContent += ' GEN6 coverage is priced separately and added to your agreement.';
       }
@@ -158,7 +182,7 @@
     return {
       service: state.service,
       vehicleClass: state.vehicleClass || '',
-      weeks: weeksBetween(),
+      billing: state.billing,
       startDate: $('startDate').value,
       endDate: $('endDate').value,
       city: $('city').value,

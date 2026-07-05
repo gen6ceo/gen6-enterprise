@@ -1,25 +1,28 @@
 // GEN6 Enterprise — Stripe Checkout session (Netlify function)
-// Creates a payment session for online-bookable rentals.
-// Payment methods: card + Affirm + Klarna (activate both in the
-// Stripe Dashboard → Settings → Payment methods before going live).
+// Recurring billing: the client pays the weekly or monthly rate at
+// checkout, then the same rate auto-bills every period until their
+// end date (the webhook sets the subscription to cancel then).
+//
+// Payment methods: card + Klarna (both support recurring on Stripe).
+// Affirm does not support recurring payments — use it on one-time
+// Stripe Payment Links for custom quotes instead.
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-// Weekly rates in cents. null = not bookable online yet → the client
-// falls back to the reserve flow and Trey sends a payment link with
-// the confirmed quote. Add prices here as they're locked in.
-const WEEKLY_RATES = {
-  sedan:       40000,  // Executive Sedan — $400/week
-  'suv-exec':  null,   // Executive SUV
-  'suv-prem':  null,   // Premium SUV
-  executive:   null,   // Executive Class
+// Rates in cents per billing period. null = not bookable online yet →
+// the client falls back to the reserve flow. Add rates as they're set.
+const RATES = {
+  sedan:      { weekly: 40000, monthly: null },  // Executive Sedan — $400/wk
+  'suv-exec': { weekly: null,  monthly: null },  // Executive SUV
+  'suv-prem': { weekly: null,  monthly: null },  // Premium SUV
+  executive:  { weekly: null,  monthly: null },  // Executive Class
 };
 
 const CLASS_NAMES = {
-  sedan:      'GEN6 Fleet — Executive Sedan (weekly rental)',
-  'suv-exec': 'GEN6 Fleet — Executive SUV (weekly rental)',
-  'suv-prem': 'GEN6 Fleet — Premium SUV (weekly rental)',
-  executive:  'GEN6 Fleet — Executive Class (weekly rental)',
+  sedan:      'GEN6 Fleet — Executive Sedan',
+  'suv-exec': 'GEN6 Fleet — Executive SUV',
+  'suv-prem': 'GEN6 Fleet — Premium SUV',
+  executive:  'GEN6 Fleet — Executive Class',
 };
 
 exports.handler = async (event) => {
@@ -32,11 +35,13 @@ exports.handler = async (event) => {
   catch { return { statusCode: 400, body: 'Invalid JSON' }; }
 
   const {
-    vehicleClass, weeks, startDate, endDate,
+    vehicleClass, billing, startDate, endDate,
     firstName, lastName, email, phone, city, insurance,
   } = body;
 
-  const rate = WEEKLY_RATES[vehicleClass];
+  const period = billing === 'monthly' ? 'monthly' : 'weekly';
+  const rate = RATES[vehicleClass] ? RATES[vehicleClass][period] : null;
+
   if (!rate) {
     return {
       statusCode: 200,
@@ -48,29 +53,39 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: 'Missing required fields' };
   }
 
-  const qty = Math.min(Math.max(parseInt(weeks, 10) || 1, 1), 26);
   const siteUrl = process.env.URL || 'https://gen6enterprise.com';
+  const interval = period === 'monthly' ? 'month' : 'week';
 
   try {
     const session = await stripe.checkout.sessions.create({
-      mode: 'payment',
-      payment_method_types: ['card', 'affirm', 'klarna'],
+      mode: 'subscription',
+      payment_method_types: ['card', 'klarna'],
       customer_email: email,
       line_items: [{
         price_data: {
           currency: 'usd',
           product_data: {
             name: CLASS_NAMES[vehicleClass] || 'GEN6 Fleet rental',
-            description: `${qty} week${qty > 1 ? 's' : ''} · ${startDate || 'start TBD'} → ${endDate || 'open'} · No deposit`,
+            description: `Billed ${period} · ${startDate || 'start TBD'} → ${endDate || 'open'} · No deposit`,
           },
           unit_amount: rate,
+          recurring: { interval },
         },
-        quantity: qty,
+        quantity: 1,
       }],
+      subscription_data: {
+        metadata: {
+          service: 'fleet',
+          vehicle_class: vehicleClass,
+          billing: period,
+          start_date: startDate || '',
+          end_date: endDate || '',
+        },
+      },
       metadata: {
         service: 'fleet',
         vehicle_class: vehicleClass,
-        weeks: String(qty),
+        billing: period,
         start_date: startDate || '',
         end_date: endDate || '',
         first_name: firstName || '',

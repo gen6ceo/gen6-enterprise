@@ -31,6 +31,19 @@ exports.handler = async (event) => {
     const session = stripeEvent.data.object;
     const m = session.metadata || {};
 
+    // Recurring booking with an end date → stop billing automatically
+    // when the rental ends (one day past the end date, to be safe).
+    if (session.subscription && m.end_date) {
+      try {
+        const cancelAt = Math.floor(new Date(m.end_date + 'T23:59:59').getTime() / 1000) + 86400;
+        if (cancelAt > Date.now() / 1000) {
+          await stripe.subscriptions.update(session.subscription, { cancel_at: cancelAt });
+        }
+      } catch (err) {
+        console.error('cancel_at error:', err.message);
+      }
+    }
+
     try {
       await fetch('https://services.leadconnectorhq.com/contacts/', {
         method: 'POST',
@@ -54,7 +67,7 @@ exports.handler = async (event) => {
             move_in_date: m.start_date || '',
             move_out_date: m.end_date || '',
             insurance: m.insurance || '',
-            details: `PAID ${(session.amount_total / 100).toFixed(2)} ${String(session.currency).toUpperCase()} — ${m.weeks} week(s), session ${session.id}`,
+            details: `BOOKED — ${(session.amount_total / 100).toFixed(2)} ${String(session.currency).toUpperCase()} billed ${m.billing || 'weekly'}, auto-cancels ${m.end_date || 'n/a (open-ended)'}, session ${session.id}`,
           },
         }),
       });

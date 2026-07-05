@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Book Now — GEN6 Enterprise | Vehicle &amp; Housing Booking, No Deposit</title>
-  <meta name="description" content="Book your GEN6 vehicle or furnished housing online. No deposit — just your documents and insurance. Pay with card, Affirm, or Klarna.">
+  <meta name="description" content="Book your GEN6 vehicle or furnished housing online. No deposit — pay your rate weekly or monthly with card or Klarna. Affirm available on custom quotes.">
   <meta name="robots" content="index, follow">
   <meta name="author" content="GEN6 Enterprise LLC">
   <meta property="og:type" content="website">
@@ -59,7 +59,7 @@
     <div class="hero-inner">
       <p class="hero-label reveal">[ BOOK NOW ]</p>
       <h1 class="hero-h1 reveal" style="font-size: var(--text-2xl);">Book it. <span class="accent-green">Land ready.</span></h1>
-      <p class="hero-subtext reveal" style="margin-bottom: 16px;">No deposit. No application. Pick your dates, send your documents, pay how you want — card, Affirm, or Klarna.</p>
+      <p class="hero-subtext reveal" style="margin-bottom: 16px;">No deposit. No application. Pick your dates, send your documents, and pay your rate weekly or monthly — card or Klarna, with Affirm available on custom quotes.</p>
     </div>
   </header>
 
@@ -111,7 +111,7 @@
                   <img src="/assets/vehicle-sedan.jpg" alt="Executive Sedan">
                   <div class="class-info">
                     <p class="class-name">Executive Sedan</p>
-                    <p class="class-rate">$400/WEEK</p>
+                    <p class="class-rate">$400/WK · BILLED WEEKLY</p>
                   </div>
                   <span class="class-badge instant">BOOK INSTANTLY</span>
                 </div>
@@ -141,6 +141,20 @@
                 </div>
               </div>
               <p class="field-error" id="err-class">Pick a vehicle class.</p>
+            </div>
+
+            <div id="billingWrap">
+              <p class="dash-title" style="margin-bottom: 12px;">How do you want to pay?</p>
+              <div class="service-choice" id="billingChoice" style="grid-template-columns: 1fr 1fr;">
+                <div class="choice-card selected" data-billing="weekly" tabindex="0" role="button" aria-pressed="true">
+                  <p class="choice-name">Weekly</p>
+                  <p class="choice-sub">SAME RATE, BILLED EVERY WEEK</p>
+                </div>
+                <div class="choice-card" data-billing="monthly" tabindex="0" role="button" aria-pressed="false">
+                  <p class="choice-name">Monthly</p>
+                  <p class="choice-sub">SAME RATE, BILLED EVERY MONTH</p>
+                </div>
+              </div>
             </div>
 
             <div class="form-row">
@@ -241,10 +255,10 @@
 
             <div class="pay-methods" id="payMethods">
               <span class="pay-chip">CARD</span>
-              <span class="pay-chip">AFFIRM — PAY OVER TIME</span>
-              <span class="pay-chip">KLARNA — 4 PAYMENTS</span>
+              <span class="pay-chip">KLARNA</span>
+              <span class="pay-chip">AUTO-STOPS AT END DATE</span>
             </div>
-            <p class="form-note" id="confirmNote">No deposit. Your card is only charged for the rental itself.</p>
+            <p class="form-note" id="confirmNote">No deposit. You pay the first period today, then the same rate each period.</p>
 
             <div class="wizard-nav">
               <button type="button" class="btn btn-ghost-white" id="backTo2">← Back</button>
