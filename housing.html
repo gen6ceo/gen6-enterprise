@@ -67,13 +67,14 @@
       <h1 class="hero-h1 reveal">A Real Home.<br><span class="accent-green">For Every Assignment.</span></h1>
       <p class="hero-subtext reveal">Fully furnished mid-term housing for traveling professionals. Utilities included. Flexible terms. Ready when you arrive.</p>
       <div class="hero-ctas reveal">
-        <a href="#request" class="btn btn-green">Request Housing →</a>
+        <a href="#book" class="btn btn-green">Book Your Stay →</a>
         <a href="#housing-types" class="btn btn-ghost-white">View Housing Types ↓</a>
       </div>
       <div class="trust-pills reveal">
         <span class="trust-pill">✓ Fully Furnished</span>
         <span class="trust-pill">✓ Utilities Included</span>
         <span class="trust-pill">✓ Flexible 30-90 Day Terms</span>
+        <span class="trust-pill">✓ No Deposit Required</span>
       </div>
     </div>
   </header>
@@ -300,12 +301,12 @@
     </section>
 
     <!-- SECTION 5 — AVAILABILITY REQUEST FORM -->
-    <section class="section bg-grid-green" id="request" style="background-color: var(--navy-mid);">
+    <section class="section bg-grid-green" id="book" style="background-color: var(--navy-mid);">
       <div class="section-inner" style="max-width: 760px;">
         <div class="section-head-center">
           <p class="section-label reveal">[ GET STARTED ]</p>
-          <h2 class="section-heading reveal">Request Housing.</h2>
-          <p class="section-subtext reveal">Tell us what you need. We'll find a match and follow up within 24 hours.</p>
+          <h2 class="section-heading reveal">Book Your Stay.</h2>
+          <p class="section-subtext reveal">No deposit. Pick your dates, send your documents, and if a unit's available it's yours. We confirm within hours.</p>
         </div>
 
         <div class="form-container reveal">
@@ -346,10 +347,16 @@
               <input type="checkbox" id="alsoNeedVehicle" name="alsoNeedVehicle">
               <label for="alsoNeedVehicle">I also need a vehicle rental</label>
             </div>
+            <select name="insurance" aria-label="Insurance">
+              <option value="" disabled selected>Insurance / coverage</option>
+              <option value="own">I have my own coverage</option>
+              <option value="gen6">Add GEN6 coverage (added cost)</option>
+              <option value="unsure">Not sure — help me figure it out</option>
+            </select>
             <textarea name="details" rows="3" placeholder="Hospital or worksite name, specific requirements, anything else helpful." aria-label="Details"></textarea>
             <input type="hidden" name="inquiryType" value="housing">
-            <button type="submit" class="form-submit-btn">Request Housing →</button>
-            <p class="form-note">We respond within 24 hours. No commitment required.</p>
+            <button type="submit" class="form-submit-btn">Book My Stay →</button>
+            <p class="form-note">No deposit. We confirm availability and documents within hours.</p>
           </form>
         </div>
       </div>

@@ -16,6 +16,7 @@ exports.handler = async (event) => {
     inquiryType, service, clientType, partnerType,
     city, address, propertyType, bedrooms, furnished,
     moveIn, moveOut, startDate, endDate, rentalType,
+    insurance, alsoNeedVehicle,
     details, source = 'GEN6 Website',
   } = body;
 
@@ -63,6 +64,8 @@ exports.handler = async (event) => {
           move_in_date:  moveIn || startDate || '',
           move_out_date: moveOut || endDate || '',
           rental_type:   rentalType || '',
+          insurance:     insurance || '',
+          also_needs_vehicle: alsoNeedVehicle ? 'yes' : '',
           property_type: propertyType || '',
           bedrooms:      bedrooms || '',
           furnished:     furnished || '',
