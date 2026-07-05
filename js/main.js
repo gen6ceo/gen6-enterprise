@@ -22,7 +22,8 @@ function animateCounter(el) {
     const elapsed = now - start;
     const progress = Math.min(elapsed / duration, 1);
     const ease = 1 - Math.pow(1 - progress, 3); // ease out cubic
-    el.textContent = Math.floor(ease * target).toLocaleString();
+    const v = Math.floor(ease * target);
+    el.textContent = 'plain' in el.dataset ? String(v) : v.toLocaleString();
     if (progress < 1) requestAnimationFrame(update);
   }
   requestAnimationFrame(update);
