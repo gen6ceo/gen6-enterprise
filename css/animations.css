@@ -38,6 +38,12 @@
   100% { top: calc(100% - 8px); opacity: 0; }
 }
 
+/* Floating dashboard widgets */
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-9px); }
+}
+
 /* Press / visibility ticker */
 @keyframes tickerScroll {
   0%   { transform: translateX(0); }
@@ -45,7 +51,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .particle, .model-arrow::after, .ticker-track, .nav-dot, .city-dot {
+  .particle, .model-arrow::after, .ticker-track, .nav-dot, .city-dot,
+  .dash-widget, .dash-status::before {
     animation: none !important;
   }
 }
