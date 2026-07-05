@@ -1725,3 +1725,14 @@ textarea { resize: vertical; min-height: 100px; }
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(0,255,136,0.55), transparent);
 }
+
+/* ── SVG line icons (replace emojis) ───────────────────────── */
+svg.icon { display: inline-block; vertical-align: -0.14em; flex-shrink: 0; }
+.card-icon, .client-icon, .amenity-icon, .model-node-icon {
+  color: var(--green);
+  filter: drop-shadow(0 0 8px rgba(0,255,136,0.25));
+}
+.client-card:nth-child(even) .client-icon { color: var(--blue-light); filter: drop-shadow(0 0 8px rgba(74,144,217,0.3)); }
+.hero-trust svg.icon, .icon-rows svg.icon, .contact-info svg.icon { color: var(--green); }
+.model-node-icon svg.icon { vertical-align: middle; }
+.stat-icon svg.icon { vertical-align: middle; }
