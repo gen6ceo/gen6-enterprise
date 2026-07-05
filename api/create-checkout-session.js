@@ -12,7 +12,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 // Rates in cents per billing period. null = not bookable online yet →
 // the client falls back to the reserve flow. Add rates as they're set.
 const RATES = {
-  sedan:      { weekly: 40000, monthly: null },  // Executive Sedan — $400/wk
+  sedan:      { weekly: null,  monthly: null },  // Executive Sedan — from $250/wk, varies by vehicle
   'suv-exec': { weekly: null,  monthly: null },  // Executive SUV
   'suv-prem': { weekly: null,  monthly: null },  // Premium SUV
   executive:  { weekly: null,  monthly: null },  // Executive Class

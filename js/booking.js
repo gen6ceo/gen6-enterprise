@@ -7,7 +7,7 @@
   // Rates in dollars per billing period. Mirror of the server table in
   // api/create-checkout-session.js — null means quote-first.
   const RATES = {
-    sedan:      { weekly: 400, monthly: null },
+    sedan:      { weekly: null, monthly: null },  // varies by vehicle — quote path
     'suv-exec': { weekly: null, monthly: null },
     'suv-prem': { weekly: null, monthly: null },
     executive:  { weekly: null, monthly: null },
@@ -170,7 +170,7 @@
       totalRow = '<div class="sum-row sum-total"><span>Due today</span><span class="sum-val">$0 — quote first</span></div>';
       $('payMethods').style.display = 'none';
       $('confirmBtn').innerHTML = 'Confirm Reservation →';
-      $('confirmNote').textContent = 'No deposit, nothing charged now. We confirm your quote within hours and send a secure payment link — card, Affirm, and Klarna accepted.';
+      $('confirmNote').textContent = 'No deposit, nothing charged now. We confirm your quote within hours and send a secure payment link with your exact rate, billed weekly or monthly — card, Affirm, and Klarna accepted.';
     }
 
     $('summary').innerHTML = rows.map(([k, v]) =>
