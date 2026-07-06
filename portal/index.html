@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Portal — GEN6 Enterprise</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/animations.css">
+</head>
+<body>
+
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="/index.html" class="nav-logo" aria-label="GEN6 Enterprise Home">
+        <span class="nav-wordmark">GEN6<span class="nav-dot" aria-hidden="true"></span></span>
+        <span class="nav-sub">ENTERPRISE</span>
+      </a>
+      <a href="/index.html" class="nav-cta">← Main Site</a>
+    </div>
+  </nav>
+
+  <header class="hero hero-sub bg-grid hero-cinematic" style="min-height: 100vh;">
+    <div class="hero-bg" aria-hidden="true"><img src="/assets/housing-interior-2.jpg" alt=""></div>
+    <div class="bg-grid-layer" aria-hidden="true"></div>
+    <div class="hero-shader" aria-hidden="true"><canvas></canvas></div>
+    <div class="hero-inner" style="max-width: 460px;">
+      <p class="hero-label reveal">[ CLIENT PORTAL ]</p>
+      <h1 class="hero-h1 reveal" style="font-size: var(--text-2xl);">Your GEN6 dashboard.</h1>
+      <p class="hero-subtext reveal">Booking status, documents, and payments — all in one place. Enter your email and we'll send you a secure sign-in link. No password.</p>
+
+      <div class="form-container reveal" id="loginCard">
+        <form id="loginForm">
+          <input type="email" id="email" placeholder="Email you booked with" required aria-label="Email">
+          <button type="submit" class="form-submit-btn" id="loginBtn">Send Sign-In Link →</button>
+          <p class="form-note">We email a one-tap link. It expires in 60 minutes.</p>
+        </form>
+        <div id="loginSent" style="display:none; text-align:center; padding: 12px 0;">
+          <div class="form-success-icon">✓</div>
+          <h3 style="font-family:'Inter',sans-serif; color:#fff; font-size:20px; margin-bottom:8px;">Check your email.</h3>
+          <p style="color:var(--text-secondary); font-size:14px;">We sent a sign-in link to <span id="sentTo" style="color:var(--green);"></span>. Open it on this device to continue.</p>
+        </div>
+        <p class="form-error-msg" id="loginErr" style="display:none;"></p>
+      </div>
+    </div>
+  </header>
+
+  <script src="/js/effects.js"></script>
+  <script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+    const SUPABASE_URL = 'https://wvfwswlpqplxpeyaxsgp.supabase.co';
+    const SUPABASE_ANON = 'sb_publishable_VTHO1hJ3DjKcSmuIOOBfPQ_zbtlT-an';
+    const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
+
+    // already signed in? go straight to the dashboard
+    const { data: { session } } = await sb.auth.getSession();
+    if (session) location.replace('/portal/app.html');
+
+    const form = document.getElementById('loginForm');
+    const btn = document.getElementById('loginBtn');
+    const err = document.getElementById('loginErr');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      btn.disabled = true; btn.textContent = 'Sending…'; err.style.display = 'none';
+      const { error } = await sb.auth.signInWithOtp({
+        email,
+        options: { emailRedirectTo: location.origin + '/portal/app.html' },
+      });
+      if (error) {
+        btn.disabled = false; btn.textContent = 'Send Sign-In Link →';
+        err.textContent = error.message; err.style.display = 'block';
+        return;
+      }
+      document.getElementById('loginForm').style.display = 'none';
+      document.getElementById('sentTo').textContent = email;
+      document.getElementById('loginSent').style.display = 'block';
+    });
+  </script>
+</body>
+</html>

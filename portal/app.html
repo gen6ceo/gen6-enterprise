@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Dashboard — GEN6 Enterprise</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <style>
+    .portal-wrap { max-width: var(--max-content); margin: 0 auto; padding: 96px 24px 80px; }
+    .portal-head { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:8px; }
+    .portal-tabs { display:flex; gap:6px; flex-wrap:wrap; margin:28px 0 32px; border-bottom:1px solid var(--border-blue); }
+    .ptab { font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase;
+      color:var(--text-muted); background:none; border:none; border-bottom:2px solid transparent; padding:12px 16px; cursor:pointer; transition:color .2s,border-color .2s; }
+    .ptab:hover { color:var(--text-secondary); }
+    .ptab.active { color:var(--green); border-bottom-color:var(--green); }
+    .ppane { display:none; }
+    .ppane.active { display:block; }
+    .status-badge { font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase;
+      padding:5px 12px; border-radius:100px; border:1px solid; }
+    .st-reserved  { color:var(--blue-light); border-color:rgba(30,77,183,0.4);  background:rgba(30,77,183,0.08); }
+    .st-confirmed { color:var(--green); border-color:rgba(0,255,136,0.4); background:rgba(0,255,136,0.06); }
+    .st-active    { color:var(--green); border-color:rgba(0,255,136,0.5); background:rgba(0,255,136,0.1); }
+    .st-completed { color:var(--text-muted); border-color:rgba(138,150,168,0.35); }
+    .st-cancelled { color:#FCA5A5; border-color:rgba(220,38,38,0.35); }
+    .kv { display:flex; justify-content:space-between; gap:16px; padding:12px 0; border-bottom:1px solid rgba(30,77,183,0.15); font-size:14px; }
+    .kv:last-child { border-bottom:none; }
+    .kv .k { color:var(--text-muted); }
+    .kv .v { color:#fff; font-weight:600; text-align:right; }
+    .doc-item { display:flex; align-items:center; gap:14px; padding:14px 0; border-bottom:1px solid rgba(30,77,183,0.15); }
+    .doc-item:last-child { border-bottom:none; }
+    .doc-status { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.08em; text-transform:uppercase; padding:3px 9px; border-radius:100px; border:1px solid; margin-left:auto; }
+    .ds-received { color:var(--blue-light); border-color:rgba(30,77,183,0.4); }
+    .ds-verified { color:var(--green); border-color:rgba(0,255,136,0.4); }
+    .ds-needs_update { color:#FBBF24; border-color:rgba(251,191,36,0.4); }
+    .empty { color:var(--text-muted); font-size:14px; padding:28px 0; text-align:center; }
+    .loading { color:var(--text-muted); font-size:13px; font-family:'JetBrains Mono',monospace; padding:40px 0; text-align:center; }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav" role="navigation" aria-label="Portal navigation">
+    <div class="nav-inner">
+      <a href="/index.html" class="nav-logo" aria-label="GEN6 Enterprise Home">
+        <span class="nav-wordmark">GEN6<span class="nav-dot" aria-hidden="true"></span></span>
+        <span class="nav-sub">PORTAL</span>
+      </a>
+      <button class="nav-cta" id="signOut" style="border:none;cursor:pointer;">Sign Out</button>
+    </div>
+  </nav>
+
+  <main class="portal-wrap">
+    <div id="loading" class="loading">Loading your dashboard…</div>
+
+    <div id="content" style="display:none;">
+      <div class="portal-head">
+        <div>
+          <p class="section-label" style="margin-bottom:6px;">[ CLIENT PORTAL ]</p>
+          <h1 class="section-heading" style="font-size:var(--text-xl);" id="greeting">Welcome back.</h1>
+        </div>
+      </div>
+
+      <div class="portal-tabs">
+        <button class="ptab active" data-tab="booking">My Booking</button>
+        <button class="ptab" data-tab="documents">Documents</button>
+        <button class="ptab" data-tab="payments">Payments</button>
+        <button class="ptab" data-tab="requests">Requests</button>
+      </div>
+
+      <!-- BOOKING -->
+      <section class="ppane active" id="pane-booking">
+        <div id="bookingList"></div>
+      </section>
+
+      <!-- DOCUMENTS -->
+      <section class="ppane" id="pane-documents">
+        <div class="form-container" style="margin-bottom:20px;">
+          <p class="dash-title" style="margin-bottom:14px;">Your documents</p>
+          <div id="docList"></div>
+        </div>
+        <div class="form-container">
+          <p class="dash-title" style="margin-bottom:12px;">Upload a document</p>
+          <select id="docKind" aria-label="Document type">
+            <option value="license">Driver's license</option>
+            <option value="insurance">Insurance</option>
+            <option value="assignment">Proof of assignment</option>
+            <option value="other">Other</option>
+          </select>
+          <input type="file" id="docFile" accept="image/*,.pdf" aria-label="File">
+          <button class="form-submit-btn" id="docUpload">Upload →</button>
+          <p class="form-note" id="docMsg">Photos or PDFs. Only you and GEN6 can see these.</p>
+        </div>
+      </section>
+
+      <!-- PAYMENTS -->
+      <section class="ppane" id="pane-payments">
+        <div class="form-container">
+          <p class="dash-title" style="margin-bottom:14px;">Billing</p>
+          <div id="payBody">
+            <p class="empty">No active subscription yet. Once your booking is confirmed and billing starts, you'll manage your card, see payment history, and download receipts here.</p>
+          </div>
+          <button class="form-submit-btn" id="manageBilling" style="display:none;">Manage Billing &amp; Receipts →</button>
+          <p class="form-note">Secure billing powered by Stripe. Update your card, view history, download receipts.</p>
+        </div>
+      </section>
+
+      <!-- REQUESTS -->
+      <section class="ppane" id="pane-requests">
+        <div class="form-container" style="margin-bottom:20px;">
+          <p class="dash-title" style="margin-bottom:12px;">Need something?</p>
+          <div class="hero-ctas" style="margin-bottom:18px;">
+            <button class="btn btn-green" data-req="extend">Extend My Stay</button>
+            <button class="btn btn-ghost-white" data-req="support">Get Help</button>
+          </div>
+          <textarea id="reqMsg" rows="3" placeholder="Tell us what you need — dates for an extension, or what you need help with." aria-label="Request details"></textarea>
+          <button class="form-submit-btn" id="reqSubmit">Send Request →</button>
+          <p class="form-note" id="reqMsgNote">Goes straight to Trey. Response within hours.</p>
+        </div>
+        <div class="form-container">
+          <p class="dash-title" style="margin-bottom:12px;">Your requests</p>
+          <div id="reqList"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+    const SUPABASE_URL = 'https://wvfwswlpqplxpeyaxsgp.supabase.co';
+    const SUPABASE_ANON = 'sb_publishable_VTHO1hJ3DjKcSmuIOOBfPQ_zbtlT-an';
+    const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
+    const $ = (id) => document.getElementById(id);
+
+    // require login
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) { location.replace('/portal/index.html'); }
+    const user = session.user;
+
+    const fmtDate = (d) => d ? new Date(d + 'T00:00').toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' }) : '—';
+    const money = (c) => c ? '$' + (c/100).toLocaleString() : '—';
+    const CLASS = { sedan:'Executive Sedan','suv-exec':'Executive SUV','suv-prem':'Premium SUV', executive:'Executive Class' };
+    const SERVICE = { fleet:'Vehicle', housing:'Housing', both:'Housing + Vehicle' };
+
+    // ── load everything ──────────────────────────────────────
+    const [{ data: bookings }, { data: docs }, { data: reqs }] = await Promise.all([
+      sb.from('bookings').select('*').order('created_at', { ascending:false }),
+      sb.from('documents').select('*').order('created_at', { ascending:false }),
+      sb.from('requests').select('*').order('created_at', { ascending:false }),
+    ]);
+
+    $('greeting').textContent = 'Welcome back' + (bookings?.[0]?.first_name ? ', ' + bookings[0].first_name : '') + '.';
+    $('loading').style.display = 'none';
+    $('content').style.display = 'block';
+
+    // BOOKINGS
+    const bl = $('bookingList');
+    if (!bookings || !bookings.length) {
+      bl.innerHTML = '<div class="form-container"><p class="empty">No bookings linked to this email yet. If you just booked, they\'ll appear here shortly — or <a href="/book.html" style="color:var(--green);">start a booking</a>.</p></div>';
+    } else {
+      bl.innerHTML = bookings.map(b => `
+        <div class="form-container" style="margin-bottom:16px;">
+          <div class="portal-head" style="margin-bottom:12px;">
+            <span style="font-family:'Inter';font-weight:700;font-size:17px;color:#fff;">${SERVICE[b.service]||b.service||'Booking'}${b.vehicle_class ? ' · ' + (CLASS[b.vehicle_class]||b.vehicle_class) : ''}</span>
+            <span class="status-badge st-${b.status||'reserved'}">${b.status||'reserved'}</span>
+          </div>
+          <div class="kv"><span class="k">Dates</span><span class="v">${fmtDate(b.start_date)} → ${b.end_date ? fmtDate(b.end_date) : 'open'}</span></div>
+          <div class="kv"><span class="k">City</span><span class="v">${b.city ? b.city.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase()) : '—'}</span></div>
+          ${b.rate_cents ? `<div class="kv"><span class="k">Rate</span><span class="v">${money(b.rate_cents)}/${b.billing==='monthly'?'mo':'wk'}</span></div>` : ''}
+          ${b.next_charge_date ? `<div class="kv"><span class="k">Next charge</span><span class="v">${fmtDate(b.next_charge_date)}</span></div>` : ''}
+          <div class="kv"><span class="k">Deposit</span><span class="v">None</span></div>
+          <div class="kv"><span class="k">Insurance</span><span class="v">${b.insurance==='gen6'?'GEN6 coverage':b.insurance==='own'?'Your policy':'To confirm'}</span></div>
+        </div>`).join('');
+    }
+
+    // DOCUMENTS
+    function renderDocs(list) {
+      const dl = $('docList');
+      if (!list || !list.length) { dl.innerHTML = '<p class="empty">No documents on file yet.</p>'; return; }
+      const KIND = { license:"Driver's license", insurance:'Insurance', assignment:'Proof of assignment', agreement:'Rental agreement', other:'Document' };
+      dl.innerHTML = list.map(d => `
+        <div class="doc-item">
+          <span style="color:var(--green);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><path d="M14 3v5h5M7 3h8l5 5v11a2 2 0 01-2 2H7a2 2 0 01-2-2V5a2 2 0 012-2z"/></svg></span>
+          <span><span style="display:block;color:#fff;font-size:14px;font-weight:600;">${KIND[d.kind]||d.kind}</span><span style="color:var(--text-muted);font-size:12px;">${d.file_name||''}</span></span>
+          <span class="doc-status ds-${d.status||'received'}">${(d.status||'received').replace('_',' ')}</span>
+        </div>`).join('');
+    }
+    renderDocs(docs);
+
+    // upload
+    $('docUpload').addEventListener('click', async () => {
+      const file = $('docFile').files[0];
+      if (!file) { $('docMsg').textContent = 'Pick a file first.'; return; }
+      const btn = $('docUpload'); btn.disabled = true; btn.textContent = 'Uploading…';
+      const path = user.id + '/' + Date.now() + '-' + file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+      const { error: upErr } = await sb.storage.from('client-docs').upload(path, file);
+      if (upErr) { $('docMsg').textContent = upErr.message; btn.disabled=false; btn.textContent='Upload →'; return; }
+      const { error: insErr } = await sb.from('documents').insert({
+        user_id: user.id, email: user.email, kind: $('docKind').value, file_path: path, file_name: file.name,
+      });
+      btn.disabled = false; btn.textContent = 'Upload →';
+      if (insErr) { $('docMsg').textContent = insErr.message; return; }
+      $('docMsg').textContent = '✓ Uploaded. GEN6 will review it.';
+      $('docFile').value = '';
+      const { data: fresh } = await sb.from('documents').select('*').order('created_at', {ascending:false});
+      renderDocs(fresh);
+    });
+
+    // PAYMENTS
+    const active = bookings?.find(b => b.stripe_customer_id);
+    if (active) {
+      $('payBody').innerHTML = `
+        <div class="kv"><span class="k">Plan</span><span class="v">${money(active.rate_cents)}/${active.billing==='monthly'?'month':'week'}</span></div>
+        <div class="kv"><span class="k">Next charge</span><span class="v">${fmtDate(active.next_charge_date)}</span></div>
+        <div class="kv"><span class="k">Deposit</span><span class="v">None</span></div>`;
+      const mb = $('manageBilling'); mb.style.display = 'flex';
+      mb.addEventListener('click', async () => {
+        mb.disabled = true; mb.textContent = 'Opening…';
+        const res = await fetch('/api/stripe-portal', {
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ customerId: active.stripe_customer_id }),
+        });
+        const out = await res.json().catch(()=>({}));
+        if (out.url) location.href = out.url;
+        else { mb.disabled=false; mb.textContent='Manage Billing & Receipts →'; }
+      });
+    }
+
+    // REQUESTS
+    let reqKind = 'extend';
+    document.querySelectorAll('[data-req]').forEach(b => b.addEventListener('click', () => {
+      reqKind = b.dataset.req;
+      document.querySelectorAll('[data-req]').forEach(x => { x.classList.remove('btn-green'); x.classList.add('btn-ghost-white'); });
+      b.classList.add('btn-green'); b.classList.remove('btn-ghost-white');
+    }));
+    function renderReqs(list) {
+      const rl = $('reqList');
+      if (!list || !list.length) { rl.innerHTML = '<p class="empty">No requests yet.</p>'; return; }
+      rl.innerHTML = list.map(r => `
+        <div class="kv"><span class="k">${r.kind==='extend'?'Extension':r.kind==='support'?'Support':'Request'} · ${new Date(r.created_at).toLocaleDateString()}</span>
+        <span class="v"><span class="status-badge st-${r.status==='resolved'?'completed':r.status==='in_progress'?'active':'reserved'}">${r.status||'open'}</span></span></div>`).join('');
+    }
+    renderReqs(reqs);
+    $('reqSubmit').addEventListener('click', async () => {
+      const msg = $('reqMsg').value.trim();
+      if (!msg) { $('reqMsgNote').textContent = 'Add a short note first.'; return; }
+      const btn = $('reqSubmit'); btn.disabled = true; btn.textContent = 'Sending…';
+      const { error } = await sb.from('requests').insert({
+        user_id: user.id, email: user.email, kind: reqKind, message: msg, booking_id: bookings?.[0]?.id || null,
+      });
+      btn.disabled = false; btn.textContent = 'Send Request →';
+      if (error) { $('reqMsgNote').textContent = error.message; return; }
+      $('reqMsg').value = ''; $('reqMsgNote').textContent = '✓ Sent. Trey will follow up.';
+      const { data: fresh } = await sb.from('requests').select('*').order('created_at',{ascending:false});
+      renderReqs(fresh);
+    });
+
+    // TABS
+    document.querySelectorAll('.ptab').forEach(t => t.addEventListener('click', () => {
+      document.querySelectorAll('.ptab').forEach(x => x.classList.remove('active'));
+      document.querySelectorAll('.ppane').forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+      $('pane-' + t.dataset.tab).classList.add('active');
+    }));
+
+    // SIGN OUT
+    $('signOut').addEventListener('click', async () => { await sb.auth.signOut(); location.replace('/portal/index.html'); });
+  </script>
+</body>
+</html>

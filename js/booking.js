@@ -236,6 +236,13 @@
         }),
       }).catch(() => {});
 
+      // portal record (client sees it after signing in)
+      fetch('/api/save-booking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      }).catch(() => {});
+
       // 2. payable → Stripe Checkout; otherwise instant reservation
       if (payableNow()) {
         const res = await fetch('/api/create-checkout-session', {
