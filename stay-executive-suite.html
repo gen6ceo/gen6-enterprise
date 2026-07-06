@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Executive Suite — GEN6 Housing | Fort Worth, TX</title>
+  <meta name="description" content="See the GEN6 Housing standard: fully furnished executive suites for traveling professionals in Fort Worth and Dallas. From $2,000/month. No deposit.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="GEN6 Enterprise LLC">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="GEN6 Enterprise">
+  <meta property="og:title" content="The Executive Suite — GEN6 Housing">
+  <meta property="og:description" content="The GEN6 Housing standard: furnished, utilities included, move-in ready. From $2,000/month. No deposit.">
+  <meta property="og:image" content="https://gen6enterprise.com/assets/listing-suite.jpg">
+  <meta name="geo.region" content="US-TX">
+  <link rel="canonical" href="https://gen6enterprise.com/stay-executive-suite.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <style>
+    .listing-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 28px; align-items: start; }
+    @media (max-width: 900px) { .listing-grid { grid-template-columns: 1fr; } }
+    .price-card { position: sticky; top: 90px; }
+    .price-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 16px 0; border-bottom: 1px solid rgba(30,77,183,0.2);
+    }
+    .price-row:last-of-type { border-bottom: none; }
+    .price-label { font-size: 14px; color: var(--text-secondary); }
+    .price-sub { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: var(--text-dim); display: block; margin-top: 3px; text-transform: uppercase; }
+    .price-val { font-size: 22px; font-weight: 800; color: var(--green); white-space: nowrap; }
+    .price-val small { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+    .suite-amenities { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 560px) { .suite-amenities { grid-template-columns: 1fr; } }
+    .distance-row {
+      display: flex; justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace; font-size: 12px;
+      color: var(--text-secondary);
+      padding: 9px 0; border-bottom: 1px solid rgba(30,77,183,0.15);
+    }
+    .distance-row:last-child { border-bottom: none; }
+    .distance-row .dist { color: var(--green); }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="/index.html" class="nav-logo" aria-label="GEN6 Enterprise Home">
+        <span class="nav-wordmark">GEN6<span class="nav-dot" aria-hidden="true"></span></span>
+        <span class="nav-sub">ENTERPRISE</span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="/index.html"           class="nav-link">Home</a></li>
+        <li><a href="/fleet.html"           class="nav-link">GEN6 Fleet</a></li>
+        <li><a href="/housing.html"         class="nav-link">GEN6 Housing</a></li>
+        <li><a href="/property-owners.html" class="nav-link">Property Owners</a></li>
+        <li><a href="/partners.html"        class="nav-link">Partners</a></li>
+        <li><a href="/about.html"           class="nav-link">About</a></li>
+      </ul>
+      <a href="/book.html" class="nav-cta">Book Now</a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-menu" role="dialog" aria-label="Mobile navigation">
+        <a href="/index.html"           class="nav-menu-link">Home</a>
+        <a href="/fleet.html"           class="nav-menu-link">GEN6 Fleet</a>
+        <a href="/housing.html"         class="nav-menu-link">GEN6 Housing</a>
+        <a href="/property-owners.html" class="nav-menu-link">Property Owners</a>
+        <a href="/partners.html"        class="nav-menu-link">Partners</a>
+        <a href="/about.html"           class="nav-menu-link">About</a>
+        <a href="/book.html"            class="nav-menu-link nav-menu-cta">Book Now</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO — full-bleed suite interior -->
+  <header class="hero hero-sub bg-grid hero-cinematic" style="min-height: 62vh;">
+    <div class="hero-bg" aria-hidden="true"><img src="/assets/listing-suite.jpg" alt=""></div>
+    <div class="bg-grid-layer" aria-hidden="true"></div>
+    <div class="hero-shader" aria-hidden="true"><canvas></canvas></div>
+    <div class="hero-inner">
+      <div class="trust-pills reveal" style="margin-bottom: 20px;">
+        <span class="trust-pill" style="color: var(--green); border-color: rgba(0,255,136,0.4);">● AVAILABLE NOW</span>
+        <span class="trust-pill">EXECUTIVE TIER</span>
+      </div>
+      <h1 class="hero-h1 reveal" style="font-size: var(--text-2xl);">The Executive Suite.</h1>
+      <p class="hero-subtext reveal" style="margin-bottom: 0;">The GEN6 Housing standard — this is what your unit looks like when you land. Fort Worth &amp; Dallas · Medical District proximity.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" style="padding-top: 56px;">
+      <div class="section-inner">
+        <div class="listing-grid">
+
+          <!-- LEFT — details -->
+          <div>
+            <p class="section-label reveal">[ THE GEN6 STANDARD ]</p>
+            <h2 class="section-heading reveal" style="font-size: var(--text-xl);">Every unit we place meets this bar.</h2>
+            <p class="section-subtext reveal" style="margin-bottom: 36px;">You book dates and a city — we match you to a real unit at this standard, near your hospital or worksite. Fully furnished, utilities on, linens made, keys waiting.</p>
+
+            <div class="suite-amenities stagger" style="margin-bottom: 40px;">
+              <div class="amenity-card reveal">
+                <div class="amenity-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="1em" height="1em"><path d="M4.5 11.5a11 11 0 0115 0M8 15a6.5 6.5 0 018 0M12 18.5h.01"/></svg></div>
+                <p class="amenity-label">High-Speed WiFi</p>
+                <p class="amenity-desc">Work-grade connection, set up before you arrive</p>
+              </div>
+              <div class="amenity-card reveal">
+                <div class="amenity-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="1em" height="1em"><path d="M5.5 3h3.5l1.8 4.5-2.5 1.8a12.5 12.5 0 005.4 5.4l1.8-2.5L20 14v3.5a2 2 0 01-2.2 2A16.5 16.5 0 013.5 5.2 2 2 0 015.5 3z"/></svg></div>
+                <p class="amenity-label">24hr Direct Support</p>
+                <p class="amenity-desc">Reach GEN6 any time — no property-manager runaround</p>
+              </div>
+              <div class="amenity-card reveal">
+                <div class="amenity-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="1em" height="1em"><path d="M3 12V9a3 3 0 013-3h12a3 3 0 013 3v3M3 12a2 2 0 100 4h18a2 2 0 100-4M5 16v3m14-3v3"/></svg></div>
+                <p class="amenity-label">Fully Furnished</p>
+                <p class="amenity-desc">Bed, sofa, dining, workspace — hotel-quality linens</p>
+              </div>
+              <div class="amenity-card reveal">
+                <div class="amenity-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="1em" height="1em"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9.5 16.5v-9h3.5a2.75 2.75 0 010 5.5H9.5"/></svg></div>
+                <p class="amenity-label">Secure Parking</p>
+                <p class="amenity-desc">Dedicated spot — pairs with your GEN6 Fleet vehicle</p>
+              </div>
+              <div class="amenity-card reveal">
+                <div class="amenity-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="1em" height="1em"><path d="M13 2L4.5 14H11l-1 8L18.5 10H12z"/></svg></div>
+                <p class="amenity-label">Utilities Included</p>
+                <p class="amenity-desc">Electric, water, gas — one rate, no surprise bills</p>
+              </div>
+              <div class="amenity-card reveal">
+                <div class="amenity-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="1em" height="1em"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M12 16v4M8.5 20h7"/></svg></div>
+                <p class="amenity-label">Remote-Ready Workspace</p>
+                <p class="amenity-desc">Desk and chair in every unit, day one</p>
+              </div>
+            </div>
+
+            <p class="dash-title reveal" style="margin-bottom: 14px;">Prime Connectivity — Typical Placement</p>
+            <div class="glass reveal" style="padding: 24px; border-radius: var(--card-radius);">
+              <div class="dash-map" style="margin-bottom: 18px;"><img src="/assets/map-dfw.jpg" alt="DFW area map" loading="lazy" style="height: 160px;"></div>
+              <div class="distance-row"><span>MEDICAL DISTRICT</span><span class="dist">&lt; 15 MIN</span></div>
+              <div class="distance-row"><span>MAJOR WORKSITES</span><span class="dist">&lt; 20 MIN</span></div>
+              <div class="distance-row"><span>GROCERY &amp; DAILY NEEDS</span><span class="dist">&lt; 5 MIN</span></div>
+            </div>
+          </div>
+
+          <!-- RIGHT — booking card -->
+          <aside class="form-container price-card reveal">
+            <p class="dash-title" style="margin-bottom: 4px;">Your Stay</p>
+            <div class="price-row">
+              <span class="price-label">Monthly stay<span class="price-sub">30–90 day terms</span></span>
+              <span class="price-val">From $2,000<small>/mo</small></span>
+            </div>
+            <div class="price-row">
+              <span class="price-label">Weekly stay<span class="price-sub">Short assignments</span></span>
+              <span class="price-val" style="font-size: 15px; color: var(--text-secondary);">Quote in hours</span>
+            </div>
+            <div class="price-row">
+              <span class="price-label">Enterprise / long-term<span class="price-sub">Crews &amp; corporate</span></span>
+              <span class="price-val" style="font-size: 15px; color: var(--text-secondary);">Custom</span>
+            </div>
+
+            <a href="/book.html?service=housing" class="btn btn-green" style="width: 100%; justify-content: center; margin: 20px 0 12px;">Book Your Stay →</a>
+            <a href="/book.html?service=both" class="btn btn-ghost-blue" style="width: 100%; justify-content: center; margin-bottom: 16px;">Add a Vehicle Too →</a>
+            <p class="form-note">No deposit. No application. Exact rate confirmed with your unit match — billed monthly at the same rate.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECOND INTERIOR SHOT BAND -->
+    <div class="photo-band reveal">
+      <img src="/assets/housing-bedroom.jpg" alt="GEN6 executive suite bedroom" loading="lazy">
+      <p class="photo-band-caption"><span class="accent-green">●</span> MOVE-IN READY. UTILITIES ON. KEYS WAITING.</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span class="footer-wordmark">GEN6<span class="footer-dot"></span></span>
+          <span class="footer-sub">ENTERPRISE</span>
+        </div>
+        <p class="footer-tagline">Housing and transportation for professionals on the move. One company. Both problems solved.</p>
+        <div class="footer-social">
+          <a href="https://instagram.com/gen6enterprise" class="footer-social-link" target="_blank" rel="noopener" aria-label="Instagram">@gen6enterprise</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-heading">Services</p>
+        <a href="/fleet.html"   class="footer-link">GEN6 Fleet</a>
+        <a href="/housing.html" class="footer-link">GEN6 Housing</a>
+        <a href="/property-owners.html" class="footer-link">Property Owners</a>
+        <a href="/partners.html" class="footer-link">Partners</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-heading">Company</p>
+        <a href="/about.html"   class="footer-link">About</a>
+        <a href="/contact.html" class="footer-link">Contact</a>
+        <a href="https://gen6education.netlify.app" class="footer-link" target="_blank" rel="noopener">GEN6 Program</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-heading">Markets</p>
+        <span class="footer-link">Fort Worth, TX</span>
+        <span class="footer-link">Dallas, TX</span>
+        <span class="footer-link">Garland, TX</span>
+        <span class="footer-link">Texas Statewide</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <p class="footer-copy">© 2025 GEN6 Enterprise LLC. All rights reserved. Fort Worth, Texas.</p>
+        <div class="footer-bottom-links">
+          <a href="/privacy.html" class="footer-legal">Privacy Policy</a>
+          <a href="/terms.html"   class="footer-legal">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/effects.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

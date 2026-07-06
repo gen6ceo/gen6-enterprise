@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partnership Application — GEN6 Enterprise</title>
+  <meta name="description" content="Apply to partner with GEN6 Enterprise — investors, strategic partners, and property owners. Reviewed personally within 48 hours.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="GEN6 Enterprise LLC">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="GEN6 Enterprise">
+  <meta property="og:title" content="Partnership Application — GEN6 Enterprise">
+  <meta property="og:description" content="Join the GEN6 ecosystem — investors, strategic partners, and property owners.">
+  <meta property="og:image" content="https://gen6enterprise.com/assets/GEN6_Logo_NavyBG.png">
+  <meta name="geo.region" content="US-TX">
+  <link rel="canonical" href="https://gen6enterprise.com/partner-apply.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/animations.css">
+</head>
+<body>
+
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="/index.html" class="nav-logo" aria-label="GEN6 Enterprise Home">
+        <span class="nav-wordmark">GEN6<span class="nav-dot" aria-hidden="true"></span></span>
+        <span class="nav-sub">ENTERPRISE</span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="/index.html"           class="nav-link">Home</a></li>
+        <li><a href="/fleet.html"           class="nav-link">GEN6 Fleet</a></li>
+        <li><a href="/housing.html"         class="nav-link">GEN6 Housing</a></li>
+        <li><a href="/property-owners.html" class="nav-link">Property Owners</a></li>
+        <li><a href="/partners.html"        class="nav-link">Partners</a></li>
+        <li><a href="/about.html"           class="nav-link">About</a></li>
+      </ul>
+      <a href="/book.html" class="nav-cta">Book Now</a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-menu" role="dialog" aria-label="Mobile navigation">
+        <a href="/index.html"           class="nav-menu-link">Home</a>
+        <a href="/fleet.html"           class="nav-menu-link">GEN6 Fleet</a>
+        <a href="/housing.html"         class="nav-menu-link">GEN6 Housing</a>
+        <a href="/property-owners.html" class="nav-menu-link">Property Owners</a>
+        <a href="/partners.html"        class="nav-menu-link">Partners</a>
+        <a href="/about.html"           class="nav-menu-link">About</a>
+        <a href="/book.html"            class="nav-menu-link nav-menu-cta">Book Now</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero hero-sub bg-grid hero-cinematic" style="min-height: 40vh; padding-bottom: 30px;">
+    <div class="hero-bg" aria-hidden="true"><img src="/assets/housing-interior-2.jpg" alt=""></div>
+    <div class="bg-grid-layer" aria-hidden="true"></div>
+    <div class="hero-shader" aria-hidden="true"><canvas></canvas></div>
+    <div class="hero-inner" style="text-align: center;">
+      <p class="hero-label reveal">[ PARTNERSHIP APPLICATION ]</p>
+      <h1 class="hero-h1 reveal" style="font-size: var(--text-2xl);">Build it with us.</h1>
+      <p class="hero-subtext reveal" style="margin: 0 auto;">Join the GEN6 ecosystem — investors, strategic partners, and property owners. Three quick steps.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" style="padding-top: 48px;">
+      <div class="section-inner" style="max-width: 720px;">
+
+        <div class="wizard-steps reveal">
+          <span class="wizard-step-ind active" data-ind="1"><span class="ws-num">1</span> Business</span>
+          <span class="wizard-connector"></span>
+          <span class="wizard-step-ind" data-ind="2"><span class="ws-num">2</span> Contact</span>
+          <span class="wizard-connector"></span>
+          <span class="wizard-step-ind" data-ind="3"><span class="ws-num">3</span> Strategic</span>
+        </div>
+
+        <div class="form-container reveal">
+          <!-- STEP 1 — BUSINESS -->
+          <div class="wizard-pane active" id="pane-1">
+            <p class="dash-title" style="margin-bottom: 16px;">Your organization</p>
+            <input type="text" id="company" placeholder="Legal business or organization name" aria-label="Business name">
+            <select id="industry" aria-label="Industry">
+              <option value="" disabled selected>Industry</option>
+              <option value="real-estate">Real estate / property investment</option>
+              <option value="staffing">Staffing / healthcare agency</option>
+              <option value="finance">Finance / capital</option>
+              <option value="corporate">Corporate / HR / relocation</option>
+              <option value="other">Other</option>
+            </select>
+            <div class="form-row">
+              <input type="number" id="yearsOperating" placeholder="Years in operation" min="0" aria-label="Years in operation">
+              <select id="assetType" aria-label="Asset type">
+                <option value="" disabled selected>Asset type</option>
+                <option value="property">Property</option>
+                <option value="capital">Capital</option>
+                <option value="clients">Client volume</option>
+                <option value="vehicles">Vehicles</option>
+                <option value="other">Other / mixed</option>
+              </select>
+            </div>
+            <div class="wizard-nav">
+              <button type="button" class="btn btn-green" id="toStep2">Continue to Contact →</button>
+            </div>
+          </div>
+
+          <!-- STEP 2 — CONTACT -->
+          <div class="wizard-pane" id="pane-2">
+            <p class="dash-title" style="margin-bottom: 16px;">Who are we talking to?</p>
+            <div class="form-row">
+              <input type="text" id="firstName" placeholder="First name" required aria-label="First name">
+              <input type="text" id="lastName" placeholder="Last name" required aria-label="Last name">
+            </div>
+            <div class="form-row">
+              <input type="email" id="email" placeholder="Email address" required aria-label="Email">
+              <input type="tel" id="phone" placeholder="Phone number" aria-label="Phone">
+            </div>
+            <input type="text" id="role" placeholder="Your role (owner, director, principal…)" aria-label="Role">
+            <p class="field-error" id="err-contact">Name and email are required.</p>
+            <div class="wizard-nav">
+              <button type="button" class="btn btn-ghost-white" id="backTo1">← Back</button>
+              <button type="button" class="btn btn-green" id="toStep3">Continue to Strategic →</button>
+            </div>
+          </div>
+
+          <!-- STEP 3 — STRATEGIC -->
+          <div class="wizard-pane" id="pane-3">
+            <p class="dash-title" style="margin-bottom: 16px;">The partnership</p>
+            <select id="partnerType" required aria-label="Partnership type">
+              <option value="" disabled selected>I'm interested in…</option>
+              <option value="investor">Investor partnership</option>
+              <option value="strategic">Strategic partnership (staffing, HR, hospital)</option>
+              <option value="property">Property / real estate partnership</option>
+              <option value="funding">Funding or lending</option>
+              <option value="other">Other</option>
+            </select>
+            <textarea id="details" rows="4" placeholder="What are you bringing to the table, and what are you looking for from GEN6?" aria-label="Details"></textarea>
+            <p class="field-error" id="err-type">Pick a partnership type.</p>
+            <div class="wizard-nav">
+              <button type="button" class="btn btn-ghost-white" id="backTo2">← Back</button>
+              <button type="button" class="btn btn-green" id="submitBtn">Submit Application →</button>
+            </div>
+            <p class="form-note" style="margin-top: 14px;">Reviewed personally by Trey. Response within 48 hours.</p>
+            <p class="field-error" id="err-submit">Something went wrong. Try again or reach us at @gen6enterprise.</p>
+          </div>
+
+          <!-- SUCCESS -->
+          <div class="wizard-pane" id="pane-done">
+            <div class="form-success">
+              <div class="form-success-icon">✓</div>
+              <h3>Application received.</h3>
+              <p>Trey reviews every application personally — expect a response within 48 hours.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-3 stagger" style="margin-top: 28px;">
+          <div class="callout-box reveal" style="text-align: center;">
+            <p class="callout-title" style="font-size: 12px;">DIRECT REVIEW</p>
+            <p class="callout-body" style="font-size: 12.5px;">Every application read by the founder — no committee.</p>
+          </div>
+          <div class="callout-box reveal" style="text-align: center;">
+            <p class="callout-title" style="font-size: 12px;">FAST RESPONSE</p>
+            <p class="callout-body" style="font-size: 12.5px;">Answers within 48 business hours.</p>
+          </div>
+          <div class="callout-box reveal" style="text-align: center;">
+            <p class="callout-title" style="font-size: 12px;">NDA AVAILABLE</p>
+            <p class="callout-body" style="font-size: 12.5px;">Detailed financials shared under NDA for investors.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span class="footer-wordmark">GEN6<span class="footer-dot"></span></span>
+          <span class="footer-sub">ENTERPRISE</span>
+        </div>
+        <p class="footer-tagline">Housing and transportation for professionals on the move. One company. Both problems solved.</p>
+        <div class="footer-social">
+          <a href="https://instagram.com/gen6enterprise" class="footer-social-link" target="_blank" rel="noopener" aria-label="Instagram">@gen6enterprise</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-heading">Services</p>
+        <a href="/fleet.html"   class="footer-link">GEN6 Fleet</a>
+        <a href="/housing.html" class="footer-link">GEN6 Housing</a>
+        <a href="/property-owners.html" class="footer-link">Property Owners</a>
+        <a href="/partners.html" class="footer-link">Partners</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-heading">Company</p>
+        <a href="/about.html"   class="footer-link">About</a>
+        <a href="/contact.html" class="footer-link">Contact</a>
+        <a href="https://gen6education.netlify.app" class="footer-link" target="_blank" rel="noopener">GEN6 Program</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-heading">Markets</p>
+        <span class="footer-link">Fort Worth, TX</span>
+        <span class="footer-link">Dallas, TX</span>
+        <span class="footer-link">Garland, TX</span>
+        <span class="footer-link">Texas Statewide</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <p class="footer-copy">© 2025 GEN6 Enterprise LLC. All rights reserved. Fort Worth, Texas.</p>
+        <div class="footer-bottom-links">
+          <a href="/privacy.html" class="footer-legal">Privacy Policy</a>
+          <a href="/terms.html"   class="footer-legal">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/effects.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+  (function () {
+    const $ = (id) => document.getElementById(id);
+    const panes = { 1: $('pane-1'), 2: $('pane-2'), 3: $('pane-3'), done: $('pane-done') };
+    const inds = document.querySelectorAll('.wizard-step-ind');
+
+    function goTo(step) {
+      Object.entries(panes).forEach(([k, p]) => p.classList.toggle('active', k === String(step)));
+      inds.forEach((ind) => {
+        const n = parseInt(ind.dataset.ind, 10);
+        ind.classList.toggle('active', n === step);
+        ind.classList.toggle('done', typeof step === 'number' ? n < step : true);
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    function showErr(id, on) { $(id).style.display = on ? 'block' : 'none'; }
+
+    $('toStep2').addEventListener('click', () => goTo(2));
+    $('backTo1').addEventListener('click', () => goTo(1));
+    $('toStep3').addEventListener('click', () => {
+      const bad = !$('firstName').value.trim() || !$('email').value.trim();
+      showErr('err-contact', bad);
+      if (!bad) goTo(3);
+    });
+    $('backTo2').addEventListener('click', () => goTo(2));
+
+    $('submitBtn').addEventListener('click', async () => {
+      if (!$('partnerType').value) { showErr('err-type', true); return; }
+      showErr('err-type', false);
+      const btn = $('submitBtn');
+      btn.disabled = true;
+      btn.textContent = 'Submitting…';
+      try {
+        const res = await fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            firstName: $('firstName').value.trim(),
+            lastName: $('lastName').value.trim(),
+            email: $('email').value.trim(),
+            phone: $('phone').value.trim(),
+            partnerType: $('partnerType').value,
+            details: [
+              'PARTNER APPLICATION',
+              'Company: ' + $('company').value,
+              'Industry: ' + $('industry').value,
+              'Years operating: ' + $('yearsOperating').value,
+              'Asset type: ' + $('assetType').value,
+              'Role: ' + $('role').value,
+              '—',
+              $('details').value,
+            ].join('\n'),
+            source: 'GEN6 Website — Partner Application',
+          }),
+        });
+        if (!res.ok) throw new Error();
+        goTo('done');
+      } catch {
+        btn.disabled = false;
+        btn.textContent = 'Submit Application →';
+        showErr('err-submit', true);
+      }
+    });
+  })();
+  </script>
+</body>
+</html>
