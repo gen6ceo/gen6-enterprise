@@ -44,6 +44,12 @@
   50%      { transform: translateY(-9px); }
 }
 
+/* Terminal shimmer bar (portal style) */
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(240%); }
+}
+
 /* Press / visibility ticker */
 @keyframes tickerScroll {
   0%   { transform: translateX(0); }

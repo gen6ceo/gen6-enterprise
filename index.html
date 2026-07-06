@@ -109,10 +109,17 @@
 
         <aside class="hero-dash reveal" aria-hidden="true">
           <div class="dash-widget">
-            <p class="dash-title">GEN6 Live Status</p>
-            <div class="dash-row"><span>Housing Units</span><span class="dash-status">AVAILABLE</span></div>
-            <div class="dash-row"><span>Fleet Vehicles</span><span class="dash-status">READY</span></div>
-            <div class="dash-row"><span>Direct Support</span><span class="dash-status">ONLINE</span></div>
+            <div class="term-head">
+              <span class="term-label">GEN6_STATUS: LIVE</span>
+              <span class="term-dot" aria-hidden="true"></span>
+            </div>
+            <div class="term-bar" aria-hidden="true"></div>
+            <div class="term-tiles">
+              <div class="term-tile"><p class="term-tile-label">Housing</p><p class="term-tile-value">AVAILABLE</p></div>
+              <div class="term-tile"><p class="term-tile-label">Fleet</p><p class="term-tile-value">READY</p></div>
+              <div class="term-tile"><p class="term-tile-label">Response</p><p class="term-tile-value">&lt; 24 HR</p></div>
+              <div class="term-tile"><p class="term-tile-label">Deposit</p><p class="term-tile-value">$0</p></div>
+            </div>
           </div>
           <div class="dash-widget">
             <p class="dash-title">The Package</p>
@@ -239,7 +246,7 @@
               <li>Vetted, maintained vehicles</li>
               <li>Available in Fort Worth &amp; Dallas</li>
             </ul>
-            <a href="/fleet.html" class="btn btn-ghost-green">Explore Fleet Options →</a>
+            <a href="/fleet.html" class="arrow-link">Explore Fleet <span class="ne" aria-hidden="true">↗</span></a>
           </article>
 
           <article class="division-card reveal">
@@ -256,7 +263,7 @@
               <li>Travel nurse &amp; contractor ready</li>
               <li>Corporate &amp; insurance billing</li>
             </ul>
-            <a href="/housing.html" class="btn btn-ghost-blue">Explore Housing Options →</a>
+            <a href="/housing.html" class="arrow-link">Explore Housing <span class="ne" aria-hidden="true">↗</span></a>
           </article>
         </div>
       </div>

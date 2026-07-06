@@ -1886,3 +1886,74 @@ svg.icon { display: inline-block; vertical-align: -0.14em; flex-shrink: 0; }
 .wizard-nav { display: flex; gap: 12px; justify-content: space-between; margin-top: 24px; }
 .wizard-nav .btn { flex-grow: 1; justify-content: center; }
 .field-error { color: #FCA5A5; font-size: 12.5px; margin: -6px 0 12px; display: none; }
+
+/* ═══════════════════════════════════════════════════════════
+   PORTAL STYLE — terminal status card, metric tiles, arrow links
+   ═══════════════════════════════════════════════════════════ */
+.term-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 14px;
+}
+.term-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+.term-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 10px var(--glow-green);
+  animation: dotPulse 2.5s ease-in-out infinite;
+}
+.term-bar {
+  height: 4px; border-radius: 100px;
+  background: var(--navy-light);
+  overflow: hidden;
+  margin-bottom: 14px;
+  position: relative;
+}
+.term-bar::after {
+  content: '';
+  position: absolute; inset: 0;
+  width: 40%;
+  border-radius: 100px;
+  background: linear-gradient(90deg, var(--green), var(--blue-mid));
+  animation: shimmer 2.2s ease-in-out infinite;
+}
+.term-tiles {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+}
+.term-tile {
+  background: var(--navy);
+  border: 1px solid var(--border-blue);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.term-tile-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+.term-tile-value {
+  font-size: 16px; font-weight: 800;
+  color: var(--green);
+  font-variant-numeric: tabular-nums;
+}
+
+/* mono arrow links (VIEW ↗ style) */
+.arrow-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--blue-mid);
+  text-decoration: none;
+  display: inline-flex; align-items: center; gap: 7px;
+  transition: color 0.2s, gap 0.2s;
+}
+.arrow-link:hover { color: var(--green); gap: 11px; }
+.arrow-link .ne {
+  display: inline-block;
+  transition: transform 0.2s;
+}
+.arrow-link:hover .ne { transform: translate(2px, -2px); }
