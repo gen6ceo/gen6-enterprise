@@ -1,0 +1,175 @@
+/* ═══════════════════════════════════════════════════════════
+   GEN6 ENTERPRISE — LIGHT THEME
+   Loaded after global.css: re-skins the site light (white/navy,
+   deep-green accent, dark footer). Remove this link to go dark.
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  --navy:          #F6F8FC;   /* page + input backgrounds */
+  --navy-mid:      #EDF1F8;   /* alt section backgrounds */
+  --navy-light:    #E2E9F4;
+  --white:         #0A1628;   /* heading text (was white) */
+  --text-primary:  #0A1628;
+  --text-secondary:#33415C;
+  --text-muted:    #5A6B87;
+  --text-dim:      #8895AC;
+  --text-faint:    #A8B4C8;
+  --green:         #00A85D;   /* deep green — readable on white */
+  --border-blue:   rgba(30,77,183,0.18);
+  --border-green:  rgba(0,168,93,0.3);
+  --glow-green:    rgba(0,168,93,0.10);
+  --glow-blue:     rgba(30,77,183,0.10);
+}
+
+body { background: #F6F8FC; }
+
+/* ── Dark islands: footer keeps the dark brand block ───────── */
+.site-footer {
+  --white: #FFFFFF;
+  --text-secondary: #C8D0DE;
+  --text-muted: #8A96A8;
+  --text-dim: #4A5568;
+  --text-faint: #6B7A94;
+  --green: #00FF88;
+}
+.site-footer .footer-copy, .site-footer .footer-legal { color: #8A96A8; }
+
+/* ── Nav ───────────────────────────────────────────────────── */
+.site-nav {
+  background: rgba(255,255,255,0.85);
+  border-bottom: 1px solid #E3E9F2;
+}
+.site-nav.scrolled { background: rgba(255,255,255,0.97); }
+.nav-wordmark { color: #0A1628; }
+.nav-link:hover, .nav-link.active { color: #0A1628; background: rgba(10,22,40,0.05); }
+.nav-link.active { color: var(--green); }
+.nav-cta { color: #FFFFFF; background: #0A1628; box-shadow: 0 6px 18px rgba(10,22,40,0.18); }
+.nav-cta:hover { box-shadow: 0 10px 26px rgba(10,22,40,0.28); }
+.nav-toggle span { background: #33415C; }
+.nav-menu { background: rgba(255,255,255,0.98); }
+.nav-menu-link { color: #33415C; border-bottom-color: #E3E9F2; }
+.nav-menu-link:hover { color: #0A1628; }
+.nav-menu-cta { background: #0A1628; color: #FFFFFF !important; }
+
+/* ── Hero: photo card on light, no dark shader ─────────────── */
+.hero, .hero-sub { background: #F6F8FC; }
+.hero-shader, .particles { display: none; }
+.hero-cinematic .hero-bg::after {
+  background:
+    linear-gradient(90deg, rgba(246,248,252,0.97) 0%, rgba(246,248,252,0.88) 38%, rgba(246,248,252,0.35) 70%, rgba(246,248,252,0.55) 100%),
+    linear-gradient(180deg, rgba(246,248,252,0.65) 0%, transparent 30%, transparent 65%, #F6F8FC 100%);
+}
+.hero-cinematic .bg-grid-layer { opacity: 0.6; }
+.hero-inner::before, .hero-inner::after { border-color: rgba(30,77,183,0.3); }
+.hero-features { background: rgba(255,255,255,0.8); border-top: 1px solid #E3E9F2; }
+.orb-green { background: rgba(0,168,93,0.07); }
+.orb-blue  { background: rgba(30,77,183,0.07); }
+
+/* ── Buttons ───────────────────────────────────────────────── */
+.btn-green, .form-submit-btn {
+  background: #0A1628; color: #FFFFFF;
+  box-shadow: 0 8px 22px rgba(10,22,40,0.20);
+}
+.btn-green:hover, .form-submit-btn:hover { box-shadow: 0 12px 30px rgba(10,22,40,0.30); }
+.btn-ghost-blue { color: #1E4DB7; border-color: rgba(30,77,183,0.4); }
+.btn-ghost-blue:hover { background: rgba(30,77,183,0.06); color: #1E4DB7; }
+.btn-ghost-white { color: #33415C; border-color: #C9D4E5; }
+.btn-ghost-white:hover { background: rgba(10,22,40,0.04); border-color: #9FB0C9; color: #0A1628; }
+.btn-ghost-green { color: #00A85D; border-color: rgba(0,168,93,0.4); }
+.btn-ghost-green:hover { background: rgba(0,168,93,0.06); }
+
+/* ── Cards & surfaces → white with soft shadow ─────────────── */
+.division-card, .glass, .listing-card, .client-card, .service-card,
+.value-card, .opportunity-box, .testimonial-card, .callout-box,
+.amenity-card, .city-card, .req-col, .faq-item, .form-container,
+.dash-widget, .choice-card, .class-row, .doc-upload, .booking-summary,
+.map-visual, .feature-tile, .model-node, .gallery-card {
+  background: #FFFFFF;
+  border-color: #E2E8F4;
+  box-shadow: 0 8px 28px rgba(15,30,60,0.06);
+}
+.division-card:hover, .listing-card:hover, .service-card:hover,
+.value-card:hover, .opportunity-box:hover, .testimonial-card:hover,
+.client-card:hover, .amenity-card:hover, .city-card:hover,
+.feature-tile:hover, .model-node:hover {
+  border-color: rgba(0,168,93,0.45);
+  box-shadow: 0 16px 40px rgba(15,30,60,0.12);
+}
+.callout-box, .choice-card, .class-row, .doc-upload, .booking-summary { background: #FBFCFE; }
+.client-card { border-left: 3px solid var(--green); }
+.client-card:nth-child(even) { border-left-color: #1E4DB7; }
+.card-spot { background: radial-gradient(300px circle at var(--mx, 50%) var(--my, 50%), rgba(30,77,183,0.06), transparent 65%); }
+
+/* hardcoded-white text → navy on light surfaces */
+.client-name, .testimonial-name, .step-title, .timeline-title,
+.service-title, .listing-name, .amenity-label, .choice-name,
+.class-name, .doc-name, .faq-item summary, .form-success h3,
+.sum-row .sum-val, .model-node-label, .footer-col-heading { color: #0A1628; }
+.site-footer .footer-col-heading { color: #FFFFFF; }
+.faq-item summary:hover { color: #00A85D; }
+.testimonial-quote, .card-body, .client-desc { color: #465877; }
+.division-photo::after { background: linear-gradient(to top, rgba(255,255,255,0.9), transparent 60%); }
+.feature-tile-photo::after { background: linear-gradient(to top, #FFFFFF, transparent 60%); }
+.feature-tile-name { color: #0A1628; }
+
+/* tags / pills / chips */
+.card-tag { color: #1E4DB7; background: rgba(30,77,183,0.07); border-color: rgba(30,77,183,0.25); }
+.card-tag-green { color: #00875A; background: rgba(0,168,93,0.08); border-color: rgba(0,168,93,0.3); }
+.trust-pill { background: #FFFFFF; border-color: #DDE5F0; color: #33415C; }
+.spec-chip, .pay-chip { border-color: #D5DEEC; color: #5A6B87; }
+.dash-chip { border-color: rgba(0,168,93,0.35); background: rgba(0,168,93,0.05); color: #33415C; }
+.class-badge { color: #1E4DB7; border-color: rgba(30,77,183,0.3); }
+.class-badge.instant { color: #00875A; border-color: rgba(0,168,93,0.4); }
+
+/* ── Stats bar ─────────────────────────────────────────────── */
+.stats-bar { background: #FFFFFF; border-color: #E3E9F2; }
+.stat-icon { background: rgba(0,168,93,0.08); border-color: rgba(0,168,93,0.25); }
+
+/* ── Forms ─────────────────────────────────────────────────── */
+input, select, textarea {
+  background: #FFFFFF;
+  border-color: #D7DFEC;
+  color: #0A1628;
+}
+input::placeholder, textarea::placeholder { color: #94A3B8; }
+input:focus, select:focus, textarea:focus {
+  border-color: rgba(0,168,93,0.55);
+  box-shadow: 0 0 0 3px rgba(0,168,93,0.10);
+}
+select option { background: #FFFFFF; color: #0A1628; }
+input[type="date"] { color-scheme: light; }
+.field-error, .form-error-msg { color: #C42836; }
+.form-error-msg { background: rgba(220,38,38,0.06); border-color: rgba(220,38,38,0.25); }
+.form-success-icon { background: rgba(0,168,93,0.08); }
+
+/* ── Steps / timeline / wizard ─────────────────────────────── */
+.steps-row .step-number { background: #FFFFFF; box-shadow: 0 6px 18px rgba(0,168,93,0.15); }
+.step-number { color: rgba(10,22,40,0.10); }
+.timeline::before { background: rgba(30,77,183,0.35); }
+.wizard-step-ind .ws-num { border-color: #C9D4E5; }
+.wizard-connector { background: #D5DEEC; }
+.doc-upload { border-style: dashed; border-color: #C9D4E5; }
+.doc-btn { border-color: #C9D4E5; color: #33415C; }
+
+/* ── Model diagram / misc ──────────────────────────────────── */
+.model-arrow { background: rgba(30,77,183,0.3); }
+.ticker-bar { background: #FFFFFF; border-color: #E3E9F2; }
+.map-svg text { fill: #0A1628; }
+.map-svg path:first-of-type { stroke: rgba(30,77,183,0.45); }
+.split-cta::after { background: linear-gradient(135deg, transparent 0%, rgba(0,168,93,0.05) 100%); }
+.cta-backdrop img { filter: brightness(1) opacity(0.14); }
+.cta-backdrop::after { background: linear-gradient(90deg, #F6F8FC 0%, rgba(246,248,252,0.88) 45%, rgba(246,248,252,0.7) 100%); }
+.photo-band-caption { color: #FFFFFF; }
+.section-glow-top { border-top-color: #E3E9F2; }
+.hero-trust { color: #5A6B87; }
+.code-404 { -webkit-text-stroke-color: rgba(0,168,93,0.6); }
+::selection { background: rgba(0,168,93,0.18); color: #0A1628; }
+#scroll-progress { background: linear-gradient(90deg, #00A85D, #1E4DB7); }
+
+/* dash widgets on the light hero */
+.dash-map { border-color: #E2E8F4; }
+.dash-row { border-bottom-color: #EDF1F8; }
+
+/* gallery/founder photo overlays keep white text on imagery */
+.gallery-name, .caption-name { color: #FFFFFF; }
+.gallery-card::after { background: linear-gradient(to top, rgba(6,14,28,0.85) 0%, transparent 55%); }
