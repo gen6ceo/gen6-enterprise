@@ -7,13 +7,13 @@
   // Rates in dollars per billing period. Mirror of the server table in
   // api/create-checkout-session.js — null means quote-first.
   const RATES = {
-    wrangler: { weekly: 375, monthly: 1500 },
-    buick:    { weekly: 325, monthly: 1300 },
-    fusion:   { weekly: 275, monthly: 1100 },
-    rogue:    { weekly: 575, monthly: 1150 },  // "weekly" slot = billed every 2 weeks
+    wrangler: { weekly: 375 },   // full-size 4x4
+    buick:    { weekly: 350 },   // SUV
+    rogue:    { weekly: 350 },   // SUV
+    fusion:   { weekly: 325 },   // sedan
   };
-  // Vehicles whose weekly-style billing runs every 2 weeks
-  const BIWEEKLY = { rogue: true };
+  // Vehicles whose weekly-style billing runs every 2 weeks (none currently)
+  const BIWEEKLY = {};
 
   const state = {
     service: null,       // fleet | housing | both

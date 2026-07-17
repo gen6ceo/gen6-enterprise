@@ -12,10 +12,10 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 // Rates in cents per billing period. null = not bookable online yet →
 // the client falls back to the reserve flow.
 const RATES = {
-  wrangler: { weekly: 37500, monthly: 150000 },
-  buick:    { weekly: 32500, monthly: 130000 },
-  fusion:   { weekly: 27500, monthly: 110000 },
-  rogue:    { biweekly: 57500, monthly: 115000 },  // billed every 2 weeks
+  wrangler: { weekly: 37500 },  // full-size 4x4 — $375/wk
+  buick:    { weekly: 35000 },  // SUV — $350/wk
+  rogue:    { weekly: 35000 },  // SUV — $350/wk
+  fusion:   { weekly: 32500 },  // sedan — $325/wk
 };
 
 const CLASS_NAMES = {
