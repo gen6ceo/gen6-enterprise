@@ -7,21 +7,28 @@
   // Rates in dollars per billing period. Mirror of the server table in
   // api/create-checkout-session.js — null means quote-first.
   const RATES = {
-    sedan:      { weekly: null, monthly: null },  // varies by vehicle — quote path
-    'suv-exec': { weekly: null, monthly: null },
-    'suv-prem': { weekly: null, monthly: null },
-    executive:  { weekly: null, monthly: null },
+    wrangler: { weekly: 375, monthly: 1500 },
+    buick:    { weekly: 325, monthly: 1300 },
+    fusion:   { weekly: 275, monthly: 1100 },
+    rogue:    { weekly: 575, monthly: 1150 },  // "weekly" slot = billed every 2 weeks
   };
+  // Vehicles whose weekly-style billing runs every 2 weeks
+  const BIWEEKLY = { rogue: true };
 
   const state = {
     service: null,       // fleet | housing | both
-    vehicleClass: null,  // sedan | suv-exec | suv-prem | executive
+    vehicleClass: null,  // wrangler | buick | fusion | rogue
     billing: 'weekly',   // weekly | monthly
   };
 
   function currentRate() {
     if (!state.vehicleClass || !RATES[state.vehicleClass]) return null;
     return RATES[state.vehicleClass][state.billing];
+  }
+
+  function periodLabel() {
+    if (state.billing === 'monthly') return 'month';
+    return BIWEEKLY[state.vehicleClass] ? '2 weeks' : 'week';
   }
 
   const $ = (id) => document.getElementById(id);
@@ -138,8 +145,8 @@
   }
 
   const CLASS_LABELS = {
-    sedan: 'Executive Sedan', 'suv-exec': 'Executive SUV',
-    'suv-prem': 'Premium SUV', executive: 'Executive Class',
+    wrangler: 'Jeep Wrangler Rubicon', buick: 'Buick Encore',
+    fusion: 'Ford Fusion', rogue: 'Nissan Rogue',
   };
   const SERVICE_LABELS = { fleet: 'Vehicle', housing: 'Housing', both: 'Housing + Vehicle' };
 
@@ -155,8 +162,8 @@
     let totalRow = '';
     if (payableNow()) {
       const rate = currentRate();
-      const per = state.billing === 'monthly' ? 'month' : 'week';
-      rows.push(['Rate', '$' + rate.toLocaleString() + '/' + per]);
+      const per = periodLabel();
+      rows.push(['Rate', '$' + rate.toLocaleString() + ' / ' + per]);
       rows.push(['Then', '$' + rate.toLocaleString() + ' every ' + per +
         ($('endDate').value ? ' — stops automatically ' + $('endDate').value : ' until you end the rental')]);
       totalRow = '<div class="sum-row sum-total"><span>Due today</span><span class="sum-val">$' + rate.toLocaleString() + '</span></div>';
@@ -182,7 +189,7 @@
     return {
       service: state.service,
       vehicleClass: state.vehicleClass || '',
-      billing: state.billing,
+      billing: (state.billing === 'weekly' && BIWEEKLY[state.vehicleClass]) ? 'biweekly' : state.billing,
       startDate: $('startDate').value,
       endDate: $('endDate').value,
       city: $('city').value,

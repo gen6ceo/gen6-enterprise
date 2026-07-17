@@ -10,19 +10,19 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 // Rates in cents per billing period. null = not bookable online yet →
-// the client falls back to the reserve flow. Add rates as they're set.
+// the client falls back to the reserve flow.
 const RATES = {
-  sedan:      { weekly: null,  monthly: null },  // Executive Sedan — from $250/wk, varies by vehicle
-  'suv-exec': { weekly: null,  monthly: null },  // Executive SUV
-  'suv-prem': { weekly: null,  monthly: null },  // Premium SUV
-  executive:  { weekly: null,  monthly: null },  // Executive Class
+  wrangler: { weekly: 37500, monthly: 150000 },
+  buick:    { weekly: 32500, monthly: 130000 },
+  fusion:   { weekly: 27500, monthly: 110000 },
+  rogue:    { biweekly: 57500, monthly: 115000 },  // billed every 2 weeks
 };
 
 const CLASS_NAMES = {
-  sedan:      'GEN6 Fleet — Executive Sedan',
-  'suv-exec': 'GEN6 Fleet — Executive SUV',
-  'suv-prem': 'GEN6 Fleet — Premium SUV',
-  executive:  'GEN6 Fleet — Executive Class',
+  wrangler: 'GEN6 Fleet — Jeep Wrangler Rubicon',
+  buick:    'GEN6 Fleet — Buick Encore',
+  fusion:   'GEN6 Fleet — Ford Fusion',
+  rogue:    'GEN6 Fleet — Nissan Rogue',
 };
 
 exports.handler = async (event) => {
@@ -39,7 +39,7 @@ exports.handler = async (event) => {
     firstName, lastName, email, phone, city, insurance,
   } = body;
 
-  const period = billing === 'monthly' ? 'monthly' : 'weekly';
+  const period = billing === 'monthly' ? 'monthly' : billing === 'biweekly' ? 'biweekly' : 'weekly';
   const rate = RATES[vehicleClass] ? RATES[vehicleClass][period] : null;
 
   if (!rate) {
@@ -55,6 +55,8 @@ exports.handler = async (event) => {
 
   const siteUrl = process.env.URL || 'https://gen6enterprise.com';
   const interval = period === 'monthly' ? 'month' : 'week';
+  const intervalCount = period === 'biweekly' ? 2 : 1;
+  const periodText = period === 'monthly' ? 'monthly' : period === 'biweekly' ? 'every 2 weeks' : 'weekly';
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -66,10 +68,10 @@ exports.handler = async (event) => {
           currency: 'usd',
           product_data: {
             name: CLASS_NAMES[vehicleClass] || 'GEN6 Fleet rental',
-            description: `Billed ${period} · ${startDate || 'start TBD'} → ${endDate || 'open'} · No deposit`,
+            description: `Billed ${periodText} · ${startDate || 'start TBD'} → ${endDate || 'open'} · No deposit`,
           },
           unit_amount: rate,
-          recurring: { interval },
+          recurring: { interval, interval_count: intervalCount },
         },
         quantity: 1,
       }],
