@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GEN6 for Companies — Book Housing &amp; Vehicles for Your Team | DFW</title>
+  <meta name="description" content="Book furnished housing and vehicles for your crew or traveling employees in one request. One agreement, one invoice, employees just pick up keys. DFW.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="GEN6 Enterprise">
+  <meta property="og:title" content="GEN6 for Companies — Team Housing &amp; Vehicles, One Invoice">
+  <meta property="og:image" content="https://gen6enterprise.com/assets/GEN6_Logo_NavyBG.png">
+  <link rel="canonical" href="https://gen6enterprise.com/corporate.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/animations.css">
+</head>
+<body>
+
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="/index.html" class="nav-logo" aria-label="GEN6 Enterprise Home">
+        <span class="nav-wordmark">GEN6<span class="nav-dot" aria-hidden="true"></span></span>
+        <span class="nav-sub">ENTERPRISE</span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="/index.html"           class="nav-link">Home</a></li>
+        <li><a href="/fleet.html"           class="nav-link">GEN6 Fleet</a></li>
+        <li><a href="/housing.html"         class="nav-link">GEN6 Housing</a></li>
+        <li><a href="/corporate.html"       class="nav-link">For Companies</a></li>
+        <li><a href="/about.html"           class="nav-link">About</a></li>
+      </ul>
+      <a href="/book.html" class="nav-cta">Book Now</a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-menu" role="dialog" aria-label="Mobile navigation">
+        <a href="/index.html"     class="nav-menu-link">Home</a>
+        <a href="/fleet.html"     class="nav-menu-link">GEN6 Fleet</a>
+        <a href="/housing.html"   class="nav-menu-link">GEN6 Housing</a>
+        <a href="/corporate.html" class="nav-menu-link">For Companies</a>
+        <a href="/about.html"     class="nav-menu-link">About</a>
+        <a href="/book.html"      class="nav-menu-link nav-menu-cta">Book Now</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero hero-sub bg-grid hero-cinematic" style="min-height: 46vh; padding-bottom: 30px;">
+    <div class="hero-bg" aria-hidden="true"><img src="/assets/stitch-housing.jpg" alt=""></div>
+    <div class="bg-grid-layer" aria-hidden="true"></div>
+    <div class="orb orb-green" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <p class="hero-label reveal">[ FOR COMPANIES ]</p>
+      <h1 class="hero-h1 reveal" style="font-size: var(--text-2xl);">Book for your whole team. <span class="accent-green">One invoice.</span></h1>
+      <p class="hero-subtext reveal" style="margin-bottom: 16px;">Housing and vehicles for crews, travel nurses, and relocating employees — one request, one agreement, one bill. Your people just pick up keys.</p>
+    </div>
+  </header>
+
+  <main>
+    <!-- HOW IT WORKS -->
+    <section class="section" style="background-color: var(--navy-mid); padding-top: 56px; padding-bottom: 56px;">
+      <div class="section-inner">
+        <div class="steps-row stagger">
+          <div class="step reveal">
+            <div class="step-number" aria-hidden="true">01</div>
+            <h3 class="step-title">Submit the request</h3>
+            <p class="step-desc">Team size, vehicles, units, dates. Two minutes. Roster can follow later.</p>
+          </div>
+          <div class="step reveal">
+            <div class="step-number" aria-hidden="true">02</div>
+            <h3 class="step-title">Same-day confirmation</h3>
+            <p class="step-desc">We confirm availability, lock the dates, and send one agreement and one invoice — company billing, ACH or card.</p>
+          </div>
+          <div class="step reveal">
+            <div class="step-number" aria-hidden="true">03</div>
+            <h3 class="step-title">Employees get keys</h3>
+            <p class="step-desc">Housing set up, vehicles ready, walk-around documented. Your team never touches paperwork or payment.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REQUEST FORM -->
+    <section class="section" id="request">
+      <div class="section-inner" style="max-width: 760px;">
+        <p class="section-label reveal">[ TEAM BOOKING ]</p>
+        <h2 class="section-heading reveal">Tell us what your team needs.</h2>
+        <p class="section-subtext reveal">Rates: sedans $325/wk · SUVs $350/wk · full-size 4x4 $375/wk · furnished units from $2,000/mo, all bills included. Volume pricing on 3+ vehicles or units.</p>
+
+        <div class="form-container reveal" id="corpFormWrap">
+          <form id="corp-form" name="corporate-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="corporate-booking">
+            <p style="display:none"><label>Leave empty: <input name="bot-field"></label></p>
+
+            <div class="form-row">
+              <input type="text" name="company" placeholder="Company name" required aria-label="Company name">
+              <input type="text" name="contactName" placeholder="Your name" required aria-label="Contact name">
+            </div>
+            <div class="form-row">
+              <input type="email" name="email" placeholder="Work email" required aria-label="Work email">
+              <input type="tel" name="phone" placeholder="Phone" required aria-label="Phone">
+            </div>
+
+            <p class="dash-title" style="margin: 18px 0 10px;">What does the team need?</p>
+            <div class="form-row">
+              <div>
+                <label class="dash-title" for="sedans" style="display:block; margin-bottom:6px; font-size: 11px;">Sedans · $325/wk</label>
+                <input type="number" id="sedans" name="sedans" min="0" max="50" value="0" aria-label="Number of sedans">
+              </div>
+              <div>
+                <label class="dash-title" for="suvs" style="display:block; margin-bottom:6px; font-size: 11px;">SUVs · $350/wk</label>
+                <input type="number" id="suvs" name="suvs" min="0" max="50" value="0" aria-label="Number of SUVs">
+              </div>
+            </div>
+            <div class="form-row">
+              <div>
+                <label class="dash-title" for="fourbyfours" style="display:block; margin-bottom:6px; font-size: 11px;">Full-size 4x4 · $375/wk</label>
+                <input type="number" id="fourbyfours" name="fourbyfours" min="0" max="50" value="0" aria-label="Number of 4x4s">
+              </div>
+              <div>
+                <label class="dash-title" for="units" style="display:block; margin-bottom:6px; font-size: 11px;">Furnished units · from $2,000/mo</label>
+                <input type="number" id="units" name="units" min="0" max="50" value="0" aria-label="Number of housing units">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div>
+                <label class="dash-title" for="corpStart" style="display:block; margin-bottom:6px;">Start date</label>
+                <input type="date" id="corpStart" name="startDate" required aria-label="Start date">
+              </div>
+              <div>
+                <label class="dash-title" for="corpEnd" style="display:block; margin-bottom:6px;">Est. end date</label>
+                <input type="date" id="corpEnd" name="endDate" aria-label="End date">
+              </div>
+            </div>
+
+            <input type="text" name="location" placeholder="Work site / hospital / area (e.g., Medical District, Dallas)" aria-label="Work location">
+
+            <select name="billing" required aria-label="Billing preference">
+              <option value="" disabled selected>Billing preference</option>
+              <option value="single-invoice">One invoice up front</option>
+              <option value="weekly">Weekly billing</option>
+              <option value="monthly">Monthly billing</option>
+              <option value="net30">Net-30 terms (established companies)</option>
+            </select>
+
+            <textarea name="roster" rows="3" placeholder="Employee names (one per line) — or send the roster later, either works." aria-label="Employee roster"></textarea>
+            <textarea name="details" rows="2" placeholder="Anything else — shift schedules, parking needs, special requirements." aria-label="Details"></textarea>
+
+            <button type="submit" class="form-submit-btn" id="corpSubmit">Submit Team Request →</button>
+            <p class="form-note">Same-day response during business hours. No payment now — you pay on the agreement you approve.</p>
+          </form>
+        </div>
+
+        <div class="form-container reveal" id="corpSuccess" style="display:none; text-align:center; padding: 48px 32px;">
+          <h3 class="section-heading" style="font-size: var(--text-xl); margin-bottom: 12px;">Request received.</h3>
+          <p class="section-subtext" style="margin-bottom: 8px;">We're checking availability for your dates now. You'll hear from us the same business day with confirmation, one agreement, and one invoice.</p>
+          <p class="section-subtext" style="margin-bottom: 0;">Need it faster? Email <a href="mailto:hello@gen6enterprise.com" style="color: var(--green);">hello@gen6enterprise.com</a> with "URGENT" and your company name.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY COMPANIES USE GEN6 -->
+    <section class="section" style="background-color: var(--navy-mid);">
+      <div class="section-inner">
+        <p class="section-label reveal">[ WHY GEN6 ]</p>
+        <h2 class="section-heading reveal">Built for the company that books it.</h2>
+        <div class="grid-3 stagger" style="margin-top: 48px;">
+          <div class="callout-box reveal">
+            <p class="callout-title">One Point of Contact</p>
+            <p class="callout-body">Housing and transportation under one roof — one agreement, one invoice, one person accountable. No juggling a rental agency and a housing platform.</p>
+          </div>
+          <div class="callout-box reveal">
+            <p class="callout-title">Built for Assignments</p>
+            <p class="callout-body">Terms follow your project: 8-week contracts, 13-week nursing assignments, 90-day builds. Extensions take one email.</p>
+          </div>
+          <div class="callout-box reveal">
+            <p class="callout-title">Owner-Operated</p>
+            <p class="callout-body">You deal directly with the owner. Documented walk-arounds on every vehicle, inventory walks on every unit, and a direct line for your whole crew's stay.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <p class="footer-copy">© 2026 GEN6 Enterprise LLC. All rights reserved. Fort Worth, Texas.</p>
+        <div class="footer-bottom-links">
+          <a href="/privacy.html" class="footer-legal">Privacy Policy</a>
+          <a href="/terms.html"   class="footer-legal">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/effects.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    (function () {
+      const form = document.getElementById('corp-form');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('corpSubmit');
+        btn.disabled = true;
+        btn.textContent = 'Submitting…';
+        const fd = new FormData(form);
+        const data = Object.fromEntries(fd.entries());
+
+        // 1. Netlify Forms — instant email/dashboard notification
+        try {
+          await fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(fd).toString(),
+          });
+        } catch (err) {}
+
+        // 2. Booking record (availability system, status: requested)
+        try {
+          await fetch('/api/corporate-booking', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+          });
+        } catch (err) {}
+
+        document.getElementById('corpFormWrap').style.display = 'none';
+        document.getElementById('corpSuccess').style.display = 'block';
+        window.scrollTo({ top: document.getElementById('request').offsetTop - 80, behavior: 'smooth' });
+      });
+    })();
+  </script>
+</body>
+</html>
