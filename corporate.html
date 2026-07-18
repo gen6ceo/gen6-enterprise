@@ -104,26 +104,31 @@
             </div>
 
             <p class="dash-title" style="margin: 18px 0 10px;">What does the team need?</p>
-            <div class="form-row">
-              <div>
-                <label class="dash-title" for="sedans" style="display:block; margin-bottom:6px; font-size: 11px;">Sedans · $325/wk</label>
-                <input type="number" id="sedans" name="sedans" min="0" max="50" value="0" aria-label="Number of sedans">
+            <div class="qty-list">
+              <div class="qty-row" data-field="sedans" data-rate="325">
+                <div class="qty-info"><p class="qty-name">Sedans</p><p class="qty-rate">$325/wk each</p></div>
+                <div class="qty-ctrl"><button type="button" class="qty-btn" data-dir="-1" aria-label="Fewer sedans">&minus;</button><span class="qty-val">0</span><button type="button" class="qty-btn" data-dir="1" aria-label="More sedans">+</button></div>
               </div>
-              <div>
-                <label class="dash-title" for="suvs" style="display:block; margin-bottom:6px; font-size: 11px;">SUVs · $350/wk</label>
-                <input type="number" id="suvs" name="suvs" min="0" max="50" value="0" aria-label="Number of SUVs">
+              <div class="qty-row" data-field="suvs" data-rate="350">
+                <div class="qty-info"><p class="qty-name">SUVs</p><p class="qty-rate">$350/wk each</p></div>
+                <div class="qty-ctrl"><button type="button" class="qty-btn" data-dir="-1" aria-label="Fewer SUVs">&minus;</button><span class="qty-val">0</span><button type="button" class="qty-btn" data-dir="1" aria-label="More SUVs">+</button></div>
               </div>
-            </div>
-            <div class="form-row">
-              <div>
-                <label class="dash-title" for="fourbyfours" style="display:block; margin-bottom:6px; font-size: 11px;">Full-size 4x4 · $375/wk</label>
-                <input type="number" id="fourbyfours" name="fourbyfours" min="0" max="50" value="0" aria-label="Number of 4x4s">
+              <div class="qty-row" data-field="fourbyfours" data-rate="375">
+                <div class="qty-info"><p class="qty-name">Full-size 4x4</p><p class="qty-rate">$375/wk each</p></div>
+                <div class="qty-ctrl"><button type="button" class="qty-btn" data-dir="-1" aria-label="Fewer 4x4s">&minus;</button><span class="qty-val">0</span><button type="button" class="qty-btn" data-dir="1" aria-label="More 4x4s">+</button></div>
               </div>
-              <div>
-                <label class="dash-title" for="units" style="display:block; margin-bottom:6px; font-size: 11px;">Furnished units · from $2,000/mo</label>
-                <input type="number" id="units" name="units" min="0" max="50" value="0" aria-label="Number of housing units">
+              <div class="qty-row" data-field="units" data-rate="0">
+                <div class="qty-info"><p class="qty-name">Furnished units</p><p class="qty-rate">from $2,000/mo — quoted by unit</p></div>
+                <div class="qty-ctrl"><button type="button" class="qty-btn" data-dir="-1" aria-label="Fewer units">&minus;</button><span class="qty-val">0</span><button type="button" class="qty-btn" data-dir="1" aria-label="More units">+</button></div>
               </div>
             </div>
+            <div class="qty-total" id="qtyTotal" style="display:none;">
+              <span>Vehicles weekly total</span><span id="qtyTotalVal">$0/wk</span>
+            </div>
+            <input type="hidden" name="sedans" id="sedans" value="0">
+            <input type="hidden" name="suvs" id="suvs" value="0">
+            <input type="hidden" name="fourbyfours" id="fourbyfours" value="0">
+            <input type="hidden" name="units" id="units" value="0">
 
             <div class="form-row">
               <div>
@@ -149,8 +154,8 @@
             <textarea name="roster" rows="3" placeholder="Employee names (one per line) — or send the roster later, either works." aria-label="Employee roster"></textarea>
             <textarea name="details" rows="2" placeholder="Anything else — shift schedules, parking needs, special requirements." aria-label="Details"></textarea>
 
-            <button type="submit" class="form-submit-btn" id="corpSubmit">Submit Team Request →</button>
-            <p class="form-note">Same-day response during business hours. No payment now — you pay on the agreement you approve.</p>
+            <button type="submit" class="form-submit-btn" id="corpSubmit">Book the Team →</button>
+            <p class="form-note" id="corpNote">Vehicles available for your dates check out instantly on one weekly bill. Housing and larger fleets are confirmed same day — no payment until you approve.</p>
           </form>
         </div>
 
@@ -199,18 +204,67 @@
 
   <script src="/js/effects.js"></script>
   <script src="/js/main.js"></script>
+  <style>
+    .qty-list { display: grid; gap: 10px; margin-bottom: 14px; }
+    .qty-row {
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border-blue);
+      border-radius: 10px; padding: 14px 16px;
+    }
+    .qty-name { font-weight: 600; font-size: 15px; margin: 0; }
+    .qty-rate { color: var(--text-muted); font-size: 12.5px; margin: 2px 0 0; }
+    .qty-ctrl { display: flex; align-items: center; gap: 14px; }
+    .qty-btn {
+      width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--border-green);
+      background: transparent; color: var(--green); font-size: 20px; cursor: pointer; line-height: 1;
+    }
+    .qty-btn:active { background: rgba(0,255,136,0.12); }
+    .qty-val { min-width: 22px; text-align: center; font-weight: 700; font-size: 17px; font-variant-numeric: tabular-nums; }
+    .qty-total {
+      display: flex; justify-content: space-between; align-items: center;
+      border: 1px solid var(--border-green); border-radius: 10px;
+      padding: 12px 16px; margin-bottom: 14px; font-weight: 600;
+    }
+    .qty-total span:last-child { color: var(--green); font-size: 18px; }
+  </style>
   <script>
     (function () {
       const form = document.getElementById('corp-form');
+      const state = { sedans: 0, suvs: 0, fourbyfours: 0, units: 0 };
+
+      function refreshTotal() {
+        let total = 0, vehicles = 0;
+        document.querySelectorAll('.qty-row').forEach((row) => {
+          const f = row.dataset.field, rate = parseInt(row.dataset.rate, 10);
+          total += state[f] * rate;
+          if (rate > 0) vehicles += state[f];
+        });
+        const box = document.getElementById('qtyTotal');
+        box.style.display = vehicles > 0 ? 'flex' : 'none';
+        document.getElementById('qtyTotalVal').textContent = '$' + total.toLocaleString() + '/wk';
+      }
+
+      document.querySelectorAll('.qty-row').forEach((row) => {
+        const f = row.dataset.field;
+        row.querySelectorAll('.qty-btn').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            state[f] = Math.max(0, Math.min(50, state[f] + parseInt(btn.dataset.dir, 10)));
+            row.querySelector('.qty-val').textContent = state[f];
+            document.getElementById(f).value = state[f];
+            refreshTotal();
+          });
+        });
+      });
+
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const btn = document.getElementById('corpSubmit');
         btn.disabled = true;
-        btn.textContent = 'Submitting…';
+        btn.textContent = 'Checking availability…';
         const fd = new FormData(form);
         const data = Object.fromEntries(fd.entries());
 
-        // 1. Netlify Forms — instant email/dashboard notification
+        // Notification first (Netlify Forms → email)
         try {
           await fetch('/', {
             method: 'POST',
@@ -219,7 +273,18 @@
           });
         } catch (err) {}
 
-        // 2. Booking record (availability system, status: requested)
+        // Vehicles-only + fits availability → straight to Stripe, one weekly bill
+        try {
+          const res = await fetch('/api/corporate-checkout', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+          });
+          const out = await res.json();
+          if (out.payable && out.url) { window.location.href = out.url; return; }
+        } catch (err) {}
+
+        // Otherwise: save as a request, Trey confirms same day
         try {
           await fetch('/api/corporate-booking', {
             method: 'POST',
