@@ -36,6 +36,7 @@ exports.handler = async (event) => {
   };
 
   let saved = false;
+  let saveError = null;
 
   // Primary: Netlify Blobs
   try {
@@ -43,6 +44,7 @@ exports.handler = async (event) => {
     await store.setJSON(id, record);
     saved = true;
   } catch (err) {
+    saveError = err.message;
     console.error('blobs save error:', err.message);
   }
 
@@ -63,6 +65,6 @@ exports.handler = async (event) => {
   return {
     statusCode: 200,
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ saved, id }),
+    body: JSON.stringify({ saved, id, ...(saveError ? { debug: saveError } : {}) }),
   };
 };
