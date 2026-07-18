@@ -19,7 +19,7 @@ exports.handler = async (event) => {
   const unavailable = new Set();
 
   try {
-    const store = getStore('bookings');
+    const store = getStore({ name: 'bookings', siteID: process.env.SITE_ID || '6f67932f-82a2-4a35-a18f-32d16cf4381c', token: process.env.NETLIFY_BLOBS_TOKEN });
     const { blobs } = await store.list();
     for (const blob of blobs) {
       let b;
