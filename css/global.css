@@ -2036,3 +2036,15 @@ svg.icon { display: inline-block; vertical-align: -0.14em; flex-shrink: 0; }
   line-height: 1.7;
 }
 .faq-item:hover { border-color: var(--border-green); }
+
+/* ── Booking availability (Turo-style) ────────────────────── */
+.class-row.unavailable {
+  opacity: 0.4;
+  filter: grayscale(0.7);
+  cursor: not-allowed;
+}
+.class-row.unavailable .class-badge {
+  background: transparent;
+  color: var(--text-muted);
+  border-color: var(--text-dim);
+}

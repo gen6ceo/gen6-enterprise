@@ -32,6 +32,42 @@
   }
 
   const $ = (id) => document.getElementById(id);
+
+  // ── Availability (Turo-style date blocking) ────────────────
+  let unavailable = new Set();
+
+  async function refreshAvailability() {
+    const start = $('startDate').value;
+    if (!start) { unavailable = new Set(); applyAvailability(); return; }
+    try {
+      const end = $('endDate').value || '';
+      const res = await fetch('/api/availability?start=' + start + '&end=' + end);
+      const out = await res.json();
+      unavailable = new Set(out.unavailable || []);
+    } catch { unavailable = new Set(); }
+    applyAvailability();
+  }
+
+  function applyAvailability() {
+    document.querySelectorAll('.class-row').forEach((row) => {
+      const cls = row.dataset.class;
+      const blocked = unavailable.has(cls);
+      row.classList.toggle('unavailable', blocked);
+      const badge = row.querySelector('.class-badge');
+      if (badge) {
+        if (!badge.dataset.orig) badge.dataset.orig = badge.textContent;
+        badge.textContent = blocked ? 'UNAVAILABLE' : badge.dataset.orig;
+      }
+      if (blocked && state.vehicleClass === cls) {
+        row.classList.remove('selected');
+        state.vehicleClass = null;
+      }
+    });
+  }
+
+  function housingBlocked() {
+    return (state.service === 'housing' || state.service === 'both') && unavailable.has('housing');
+  }
   const panes = [1, 2, 3].map((n) => $('pane-' + n));
   const inds = document.querySelectorAll('.wizard-step-ind');
 
@@ -68,6 +104,7 @@
 
   document.querySelectorAll('.class-row').forEach((row) => {
     const pick = () => {
+      if (row.classList.contains('unavailable')) return;
       document.querySelectorAll('.class-row').forEach((r) => r.classList.remove('selected'));
       row.classList.add('selected');
       state.vehicleClass = row.dataset.class;
@@ -99,11 +136,26 @@
     if (presetCard) presetCard.click();
   }
 
-  $('toStep2').addEventListener('click', () => {
+  // Re-check availability whenever dates change
+  $('startDate').addEventListener('change', refreshAvailability);
+  $('endDate').addEventListener('change', refreshAvailability);
+
+  $('toStep2').addEventListener('click', async () => {
     let ok = true;
     if (!state.service) { showErr('err-service', true); ok = false; }
-    if (state.service && state.service !== 'housing' && !state.vehicleClass) { showErr('err-class', true); ok = false; }
     if (!$('startDate').value) { showErr('err-dates', true); ok = false; } else { showErr('err-dates', false); }
+    if (ok && $('startDate').value) {
+      await refreshAvailability();
+      if (housingBlocked()) {
+        const errEl = document.getElementById('err-dates');
+        if (errEl) errEl.textContent = 'Housing is booked for those dates — try different dates or contact us.';
+        showErr('err-dates', true); ok = false;
+      }
+      if (state.vehicleClass && unavailable.has(state.vehicleClass)) {
+        showErr('err-class', true); ok = false;
+      }
+    }
+    if (state.service && state.service !== 'housing' && !state.vehicleClass) { showErr('err-class', true); ok = false; }
     if (ok) {
       $('hint-license').textContent = state.service === 'housing'
         ? 'For identity verification'
