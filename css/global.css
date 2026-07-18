@@ -2048,3 +2048,10 @@ svg.icon { display: inline-block; vertical-align: -0.14em; flex-shrink: 0; }
   color: var(--text-muted);
   border-color: var(--text-dim);
 }
+
+/* ── iOS Safari fix: the hero light-shader (mix-blend-mode: screen on a
+   canvas) composites as a white veil on iPhones. It's decorative — skip
+   it on touch devices entirely. ─────────────────────────────────────── */
+@media (hover: none), (pointer: coarse) {
+  .hero-shader { display: none !important; }
+}
