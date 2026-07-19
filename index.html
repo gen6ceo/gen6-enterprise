@@ -437,5 +437,13 @@
 
   <script src="/js/effects.js"></script>
   <script src="/js/main.js"></script>
+
+  <!-- Netlify Forms registration for site-wide lead notifications (submitted server-side by api/lead.js) -->
+  <form name="site-lead" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="text" name="firstName"><input type="text" name="lastName"><input type="email" name="email">
+    <input type="tel" name="phone"><input type="text" name="type"><input type="text" name="city">
+    <input type="text" name="startDate"><input type="text" name="endDate"><input type="text" name="source">
+    <input type="text" name="details"><input type="text" name="bot-field">
+  </form>
 </body>
 </html>

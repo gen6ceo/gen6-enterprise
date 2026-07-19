@@ -99,9 +99,47 @@ exports.handler = async (event) => {
     console.error('Beehiiv error:', err.message);
   }
 
+  // 3. Save the full lead to Netlify Blobs (so nothing is ever lost)
+  let saved = false;
+  try {
+    const { getStore } = require('@netlify/blobs');
+    const store = getStore({ name: 'leads', siteID: process.env.SITE_ID || '6f67932f-82a2-4a35-a18f-32d16cf4381c', token: process.env.NETLIFY_BLOBS_TOKEN });
+    const id = 'lead-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 8);
+    await store.setJSON(id, { id, ...body, type, created: new Date().toISOString() });
+    saved = true;
+  } catch (err) {
+    console.error('lead blobs error:', err.message);
+  }
+
+  // 4. Forward into Netlify Forms → instant email notification to Trey
+  let notified = false;
+  try {
+    const siteUrl = process.env.URL || 'https://gen6enterprise.com';
+    const res = await fetch(siteUrl + '/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        'form-name': 'site-lead',
+        firstName: firstName || '',
+        lastName: lastName || '',
+        email: email || '',
+        phone: phone || '',
+        type,
+        city: city || address || '',
+        startDate: moveIn || startDate || '',
+        endDate: moveOut || endDate || '',
+        source,
+        details: details || '',
+      }).toString(),
+    });
+    notified = res.ok;
+  } catch (err) {
+    console.error('lead notify error:', err.message);
+  }
+
   return {
     statusCode: 200,
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ success: true }),
+    body: JSON.stringify({ success: true, saved, notified }),
   };
 };
