@@ -87,7 +87,7 @@
       <div class="section-inner" style="max-width: 760px;">
         <p class="section-label reveal">[ TEAM BOOKING ]</p>
         <h2 class="section-heading reveal">Tell us what your team needs.</h2>
-        <p class="section-subtext reveal">Rates: sedans $325/wk · SUVs $350/wk · full-size 4x4 $375/wk · furnished units from $2,000/mo, all bills included. Volume pricing on 3+ vehicles or units.</p>
+        <p class="section-subtext reveal">Rates: sedans $325/wk · SUVs $350/wk · full-size 4x4 $375/wk · furnished units from $2,000/mo, all bills included. <strong>Fleet discount, applied automatically: 2 items save 5%, 3 items save 8%, 4 or more save 10%</strong> — every vehicle and unit on the order counts.</p>
 
         <div class="form-container reveal" id="corpFormWrap">
           <form id="corp-form" name="corporate-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
@@ -122,8 +122,11 @@
                 <div class="qty-ctrl"><button type="button" class="qty-btn" data-dir="-1" aria-label="Fewer units">&minus;</button><span class="qty-val">0</span><button type="button" class="qty-btn" data-dir="1" aria-label="More units">+</button></div>
               </div>
             </div>
-            <div class="qty-total" id="qtyTotal" style="display:none;">
-              <span>Vehicles weekly total</span><span id="qtyTotalVal">$0/wk</span>
+            <div id="qtyTotals" style="display:none;">
+              <div class="qty-subrow"><span>Vehicles subtotal</span><span id="qtySubVal">$0/wk</span></div>
+              <div class="qty-subrow qty-discount" id="qtyDiscRow" style="display:none;"><span id="qtyDiscLabel">Fleet discount</span><span id="qtyDiscVal">&minus;$0/wk</span></div>
+              <div class="qty-total"><span>Weekly total</span><span id="qtyTotalVal">$0/wk</span></div>
+              <p class="form-note" id="qtyUnitsNote" style="display:none; margin-top: 6px;">Furnished units are quoted per unit — your fleet discount applies to those quotes too.</p>
             </div>
             <input type="hidden" name="sedans" id="sedans" value="0">
             <input type="hidden" name="suvs" id="suvs" value="0">
@@ -220,10 +223,16 @@
     }
     .qty-btn:active { background: rgba(0,255,136,0.12); }
     .qty-val { min-width: 22px; text-align: center; font-weight: 700; font-size: 17px; font-variant-numeric: tabular-nums; }
+    #qtyTotals { margin-bottom: 14px; }
+    .qty-subrow {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 6px 16px; color: var(--text-secondary); font-size: 14px;
+    }
+    .qty-discount span:last-child { color: var(--green); font-weight: 600; }
     .qty-total {
       display: flex; justify-content: space-between; align-items: center;
       border: 1px solid var(--border-green); border-radius: 10px;
-      padding: 12px 16px; margin-bottom: 14px; font-weight: 600;
+      padding: 12px 16px; margin-top: 6px; font-weight: 600;
     }
     .qty-total span:last-child { color: var(--green); font-size: 18px; }
   </style>
@@ -232,16 +241,32 @@
       const form = document.getElementById('corp-form');
       const state = { sedans: 0, suvs: 0, fourbyfours: 0, units: 0 };
 
+      function discountPct(items) {
+        if (items >= 4) return 0.10;
+        if (items === 3) return 0.08;
+        if (items === 2) return 0.05;
+        return 0;
+      }
+
       function refreshTotal() {
-        let total = 0, vehicles = 0;
+        let subtotal = 0, vehicles = 0;
         document.querySelectorAll('.qty-row').forEach((row) => {
           const f = row.dataset.field, rate = parseInt(row.dataset.rate, 10);
-          total += state[f] * rate;
+          subtotal += state[f] * rate;
           if (rate > 0) vehicles += state[f];
         });
-        const box = document.getElementById('qtyTotal');
-        box.style.display = vehicles > 0 ? 'flex' : 'none';
-        document.getElementById('qtyTotalVal').textContent = '$' + total.toLocaleString() + '/wk';
+        const items = vehicles + state.units;
+        const pct = discountPct(items);
+        const discount = Math.round(subtotal * pct);
+        const box = document.getElementById('qtyTotals');
+        box.style.display = vehicles > 0 ? 'block' : 'none';
+        document.getElementById('qtySubVal').textContent = '$' + subtotal.toLocaleString() + '/wk';
+        const discRow = document.getElementById('qtyDiscRow');
+        discRow.style.display = discount > 0 ? 'flex' : 'none';
+        document.getElementById('qtyDiscLabel').textContent = 'Fleet discount (' + Math.round(pct * 100) + '%)';
+        document.getElementById('qtyDiscVal').innerHTML = '&minus;$' + discount.toLocaleString() + '/wk';
+        document.getElementById('qtyTotalVal').textContent = '$' + (subtotal - discount).toLocaleString() + '/wk';
+        document.getElementById('qtyUnitsNote').style.display = (state.units > 0 && pct > 0) ? 'block' : 'none';
       }
 
       document.querySelectorAll('.qty-row').forEach((row) => {

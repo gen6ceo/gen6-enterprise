@@ -17,6 +17,14 @@ const NAMES = {
 const POOLS = { sedans: ['fusion'], suvs: ['buick', 'rogue'], fourbyfours: ['wrangler'] };
 const BLOCKING = new Set(['reserved', 'confirmed', 'active', 'paid']);
 
+// Fleet discount: more vehicles/units on one order = lower rate on every vehicle.
+function discountPct(totalItems) {
+  if (totalItems >= 4) return 0.10;
+  if (totalItems === 3) return 0.08;
+  if (totalItems === 2) return 0.05;
+  return 0;
+}
+
 function store() {
   return getStore({ name: 'bookings', siteID: process.env.SITE_ID || '6f67932f-82a2-4a35-a18f-32d16cf4381c', token: process.env.NETLIFY_BLOBS_TOKEN });
 }
@@ -74,6 +82,8 @@ exports.handler = async (event) => {
   }
 
   const siteUrl = process.env.URL || 'https://gen6enterprise.com';
+  const pct = discountPct(totalVehicles + units);
+  const pctLabel = pct ? ` · ${Math.round(pct * 100)}% fleet discount applied` : '';
   try {
     const session = await stripe.checkout.sessions.create({
       mode: 'subscription',
@@ -84,9 +94,9 @@ exports.handler = async (event) => {
           currency: 'usd',
           product_data: {
             name: 'GEN6 Fleet — ' + NAMES[cls],
-            description: `Corporate rental for ${b.company || 'company'} · ${b.startDate} → ${b.endDate || 'open'} · No deposit`,
+            description: `Corporate rental for ${b.company || 'company'} · ${b.startDate} → ${b.endDate || 'open'} · No deposit${pctLabel}`,
           },
-          unit_amount: RATES[cls],
+          unit_amount: Math.round(RATES[cls] * (1 - pct)),
           recurring: { interval: 'week' },
         },
         quantity: 1,
@@ -117,7 +127,15 @@ exports.handler = async (event) => {
     return {
       statusCode: 200,
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ payable: true, url: session.url, vehicles: assigned }),
+      body: JSON.stringify({
+        payable: true,
+        url: session.url,
+        vehicles: assigned,
+        pricing: {
+          discountPct: Math.round(pct * 100),
+          weeklyTotalCents: assigned.reduce((s, c) => s + Math.round(RATES[c] * (1 - pct)), 0),
+        },
+      }),
     };
   } catch (err) {
     console.error('corporate checkout error:', err.message);
